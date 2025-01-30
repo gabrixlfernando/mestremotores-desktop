@@ -22,5 +22,19 @@ namespace mestremotores_gabrielfernando
             new frmMenuPrincipal().Show();
             Hide();
         }
+
+        private void btnFechar_Click(object sender, EventArgs e)
+        {
+            var sair = MessageBox.Show("Deseja encerrar o sistema?", "ENCERRAR", MessageBoxButtons.YesNoCancel);
+
+            if (sair == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
+            else if (sair == DialogResult.No)
+            {
+                new frmLogin().Show();
+            }
+        }
     }
 }

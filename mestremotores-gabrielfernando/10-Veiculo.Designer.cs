@@ -214,6 +214,7 @@
             this.Name = "frmVeiculo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Veiculos";
+            this.Load += new System.EventHandler(this.frmVeiculo_Load);
             this.pnlCliente.ResumeLayout(false);
             this.pnlCliente.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVeiculo)).EndInit();

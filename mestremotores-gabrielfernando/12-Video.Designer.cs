@@ -214,6 +214,7 @@
             this.Name = "frmVideo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Video";
+            this.Load += new System.EventHandler(this.frmVideo_Load);
             this.pnlCliente.ResumeLayout(false);
             this.pnlCliente.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVideo)).EndInit();

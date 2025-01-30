@@ -214,6 +214,7 @@
             this.Name = "frmFuncionario";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Funcionario";
+            this.Load += new System.EventHandler(this.frmFuncionario_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.pnlCliente.ResumeLayout(false);

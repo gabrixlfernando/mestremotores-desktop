@@ -39,7 +39,7 @@ namespace mestremotores_gabrielfernando
 
         private void timerDataHora_Tick(object sender, EventArgs e)
         {
-            lblData.Text = DateTime.Now.ToString("dd/mm/yyyy");
+            lblData.Text = DateTime.Now.ToString("dd/MM/yyyy");
             lblHora.Text = DateTime.Now.ToString("HH:mm:ss");
         }
 
@@ -213,5 +213,7 @@ namespace mestremotores_gabrielfernando
             new frmGaleria().Show();
             Hide();
         }
+
+        
     }
 }

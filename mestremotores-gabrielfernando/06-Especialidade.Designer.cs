@@ -214,6 +214,7 @@
             this.Name = "frmEspecialidade";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Especialidade";
+            this.Load += new System.EventHandler(this.frmEspecialidade_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEspecialidade)).EndInit();

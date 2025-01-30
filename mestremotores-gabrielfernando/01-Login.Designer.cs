@@ -33,20 +33,20 @@
             this.btnFechar = new System.Windows.Forms.Button();
             this.btnEntrar = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.pnlEmail = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.txtEmail = new System.Windows.Forms.TextBox();
-            this.pnlSenha = new System.Windows.Forms.Panel();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.txtSenha = new System.Windows.Forms.TextBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pnlSenha = new System.Windows.Forms.Panel();
+            this.txtSenha = new System.Windows.Forms.TextBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pnlEmail = new System.Windows.Forms.Panel();
+            this.txtEmail = new System.Windows.Forms.TextBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pctLogo)).BeginInit();
             this.panel1.SuspendLayout();
-            this.pnlEmail.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.pnlSenha.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            this.pnlEmail.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // pctLogo
@@ -81,6 +81,7 @@
             this.btnFechar.TabIndex = 5;
             this.btnFechar.Text = "X";
             this.btnFechar.UseVisualStyleBackColor = false;
+            this.btnFechar.Click += new System.EventHandler(this.btnFechar_Click);
             // 
             // btnEntrar
             // 
@@ -107,33 +108,15 @@
             this.panel1.Size = new System.Drawing.Size(412, 347);
             this.panel1.TabIndex = 7;
             // 
-            // pnlEmail
+            // pictureBox3
             // 
-            this.pnlEmail.BackColor = System.Drawing.Color.White;
-            this.pnlEmail.Controls.Add(this.txtEmail);
-            this.pnlEmail.Controls.Add(this.pictureBox1);
-            this.pnlEmail.Location = new System.Drawing.Point(45, 62);
-            this.pnlEmail.Name = "pnlEmail";
-            this.pnlEmail.Size = new System.Drawing.Size(316, 50);
-            this.pnlEmail.TabIndex = 7;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::mestremotores_gabrielfernando.Properties.Resources.email;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(48, 49);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
-            // txtEmail
-            // 
-            this.txtEmail.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtEmail.Location = new System.Drawing.Point(49, 20);
-            this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(267, 13);
-            this.txtEmail.TabIndex = 1;
+            this.pictureBox3.Image = global::mestremotores_gabrielfernando.Properties.Resources.visualizar;
+            this.pictureBox3.Location = new System.Drawing.Point(321, 200);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(40, 38);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox3.TabIndex = 8;
+            this.pictureBox3.TabStop = false;
             // 
             // pnlSenha
             // 
@@ -145,6 +128,14 @@
             this.pnlSenha.Size = new System.Drawing.Size(316, 50);
             this.pnlSenha.TabIndex = 8;
             // 
+            // txtSenha
+            // 
+            this.txtSenha.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtSenha.Location = new System.Drawing.Point(49, 21);
+            this.txtSenha.Name = "txtSenha";
+            this.txtSenha.Size = new System.Drawing.Size(267, 13);
+            this.txtSenha.TabIndex = 1;
+            // 
             // pictureBox2
             // 
             this.pictureBox2.Image = global::mestremotores_gabrielfernando.Properties.Resources.senha;
@@ -155,23 +146,33 @@
             this.pictureBox2.TabIndex = 0;
             this.pictureBox2.TabStop = false;
             // 
-            // txtSenha
+            // pnlEmail
             // 
-            this.txtSenha.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtSenha.Location = new System.Drawing.Point(49, 21);
-            this.txtSenha.Name = "txtSenha";
-            this.txtSenha.Size = new System.Drawing.Size(267, 13);
-            this.txtSenha.TabIndex = 1;
+            this.pnlEmail.BackColor = System.Drawing.Color.White;
+            this.pnlEmail.Controls.Add(this.txtEmail);
+            this.pnlEmail.Controls.Add(this.pictureBox1);
+            this.pnlEmail.Location = new System.Drawing.Point(45, 62);
+            this.pnlEmail.Name = "pnlEmail";
+            this.pnlEmail.Size = new System.Drawing.Size(316, 50);
+            this.pnlEmail.TabIndex = 7;
             // 
-            // pictureBox3
+            // txtEmail
             // 
-            this.pictureBox3.Image = global::mestremotores_gabrielfernando.Properties.Resources.visualizar;
-            this.pictureBox3.Location = new System.Drawing.Point(321, 200);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(40, 38);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox3.TabIndex = 8;
-            this.pictureBox3.TabStop = false;
+            this.txtEmail.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtEmail.Location = new System.Drawing.Point(49, 20);
+            this.txtEmail.Name = "txtEmail";
+            this.txtEmail.Size = new System.Drawing.Size(267, 13);
+            this.txtEmail.TabIndex = 1;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::mestremotores_gabrielfernando.Properties.Resources.email;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(48, 49);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
             // 
             // frmLogin
             // 
@@ -188,13 +189,13 @@
             this.Text = "Login";
             ((System.ComponentModel.ISupportInitialize)(this.pctLogo)).EndInit();
             this.panel1.ResumeLayout(false);
-            this.pnlEmail.ResumeLayout(false);
-            this.pnlEmail.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.pnlSenha.ResumeLayout(false);
             this.pnlSenha.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            this.pnlEmail.ResumeLayout(false);
+            this.pnlEmail.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
