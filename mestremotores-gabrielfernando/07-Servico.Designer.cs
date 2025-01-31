@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlCliente = new System.Windows.Forms.Panel();
             this.cmbStatus = new System.Windows.Forms.ComboBox();
             this.txtNome = new System.Windows.Forms.TextBox();
@@ -153,6 +154,14 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvServico.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvServico.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(50)))), ((int)(((byte)(90)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvServico.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvServico.EnableHeadersVisualStyles = false;
             this.dgvServico.Location = new System.Drawing.Point(116, 107);
             this.dgvServico.MultiSelect = false;
@@ -162,6 +171,8 @@
             this.dgvServico.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvServico.Size = new System.Drawing.Size(858, 422);
             this.dgvServico.TabIndex = 11;
+            this.dgvServico.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvServico_CellMouseEnter);
+            this.dgvServico.CellMouseLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvServico_CellMouseLeave);
             // 
             // btnFechar
             // 
