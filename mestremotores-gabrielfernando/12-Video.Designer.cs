@@ -162,6 +162,8 @@
             this.dgvVideo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvVideo.Size = new System.Drawing.Size(858, 422);
             this.dgvVideo.TabIndex = 18;
+            this.dgvVideo.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVideo_CellMouseEnter);
+            this.dgvVideo.CellMouseLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVideo_CellMouseLeave);
             // 
             // btnFechar
             // 

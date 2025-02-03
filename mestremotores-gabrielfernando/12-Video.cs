@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,9 +14,14 @@ namespace mestremotores_gabrielfernando
 {
     public partial class frmVideo : Form
     {
+        private PictureBox pctVideo = new PictureBox();
         public frmVideo()
         {
             InitializeComponent();
+            pctVideo.SizeMode = PictureBoxSizeMode.StretchImage;
+            pctVideo.BorderStyle = BorderStyle.FixedSingle;
+            pctVideo.Visible = false;
+            pctVideo.BackColor = Color.FromArgb(39, 50, 90);
         }
 
         private void btnFechar_Click(object sender, EventArgs e)
@@ -38,9 +44,10 @@ namespace mestremotores_gabrielfernando
                 dgvVideo.Columns[0].Visible = false;
                 dgvVideo.Columns[1].HeaderText = "NOME";
                 dgvVideo.Columns[2].Visible = false;
-                dgvVideo.Columns[3].Visible = false;
+                dgvVideo.Columns[3].HeaderText = "ALT";
                 dgvVideo.Columns[4].HeaderText = "URL";               
                 dgvVideo.Columns[5].HeaderText = "STATUS";
+                MostrarImagem();
                 dgvVideo.ClearSelection();
 
                 Banco.Desconectar();
@@ -52,9 +59,64 @@ namespace mestremotores_gabrielfernando
             }
         }
 
+        private void MostrarImagem()
+        {
+            string caminhoBase = @"C:\xampp\htdocs\ti26\mestremotores\";
+
+            DataGridViewImageColumn imgColumn = new DataGridViewImageColumn();
+            imgColumn.HeaderText = "FOTO";
+            imgColumn.ImageLayout = DataGridViewImageCellLayout.Zoom;
+            dgvVideo.Columns.Insert(0, imgColumn);
+
+            foreach (DataGridViewRow row in dgvVideo.Rows)
+            {
+                if (row.Cells["foto_video"].Value != DBNull.Value)
+                {
+                    string caminhoRelativo = row.Cells["foto_video"].Value.ToString();
+                    string caminhoCompleto = Path.Combine(caminhoBase, caminhoRelativo);
+
+                    if (File.Exists(caminhoCompleto))
+                    {
+                        row.Cells[0].Value = Image.FromFile(caminhoCompleto);
+                    }
+                    else
+                    {
+                        row.Cells[0].Value = Properties.Resources.btnVideo;
+                    }
+                }
+            }
+        }
+
         private void frmVideo_Load(object sender, EventArgs e)
         {
             CarregarVideo();
+        }
+
+        private void dgvVideo_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex == 0)
+            {
+                var cell = dgvVideo.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                if (cell.Value != null && cell.Value is Image img)
+                {
+                    pctVideo.Image = img;
+                    pctVideo.Visible = true;
+
+                    pctVideo.Location = new Point(dgvVideo.Location.X + dgvVideo.Width - 300, dgvVideo.Location.Y);
+                    pctVideo.Width = 300;
+                    pctVideo.Height = 300;
+                    this.Controls.Add(pctVideo);
+                    pctVideo.BringToFront();
+                }
+            }
+        }
+
+        private void dgvVideo_CellMouseLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex == 0)
+            {
+                pctVideo.Visible = false;
+            }
         }
     }
 }

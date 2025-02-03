@@ -162,6 +162,8 @@
             this.dgvNoticia.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvNoticia.Size = new System.Drawing.Size(858, 422);
             this.dgvNoticia.TabIndex = 18;
+            this.dgvNoticia.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvNoticia_CellMouseEnter);
+            this.dgvNoticia.CellMouseLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvNoticia_CellMouseLeave);
             // 
             // btnFechar
             // 

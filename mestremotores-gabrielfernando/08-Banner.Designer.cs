@@ -162,6 +162,8 @@
             this.dgvBanner.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvBanner.Size = new System.Drawing.Size(858, 422);
             this.dgvBanner.TabIndex = 18;
+            this.dgvBanner.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBanner_CellMouseEnter);
+            this.dgvBanner.CellMouseLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBanner_CellMouseLeave);
             // 
             // btnFechar
             // 
