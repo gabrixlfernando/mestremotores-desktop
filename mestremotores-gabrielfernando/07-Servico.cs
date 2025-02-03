@@ -67,6 +67,78 @@ namespace mestremotores_gabrielfernando
                 MessageBox.Show("Erro ao carregar os serviços. " + erro);
                 throw;
             }
+        }private void CarregarServicoNome()
+        {
+            
+            try
+            {
+                Banco.Conectar();
+                string selecionar = "SELECT* FROM tbl_servico WHERE nome_servico LIKE @nome ORDER BY nome_servico;";
+                MySqlCommand cmd = new MySqlCommand(selecionar, Banco.conexao);
+                cmd.Parameters.AddWithValue("@nome", "%" + txtServico.Text + "%");
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                dgvServico.DataSource = dt;
+                dgvServico.Columns[0].Visible = false;
+                dgvServico.Columns[1].HeaderText = "NOME";
+                dgvServico.Columns[2].HeaderText = "DESCRIÇÃO";
+                dgvServico.Columns[3].HeaderText = "VALOR";
+                dgvServico.Columns[4].HeaderText = "TEMPO";
+                dgvServico.Columns[5].Visible = false;
+                dgvServico.Columns[6].Visible = false;
+                dgvServico.Columns[7].HeaderText = "TIPO";
+                dgvServico.Columns[8].Visible = false;
+                dgvServico.Columns[9].HeaderText = "STATUS";
+
+                MostrarImagem();
+
+
+                dgvServico.ClearSelection();
+
+                Banco.Desconectar();
+            }
+            catch (Exception erro)
+            {
+                MessageBox.Show("Erro ao carregar os serviços. " + erro);
+                throw;
+            }
+        }private void CarregarServicoStatus()
+        {
+            
+            try
+            {
+                Banco.Conectar();
+                string selecionar = "SELECT* FROM tbl_servico WHERE status_servico = @status ORDER BY nome_servico;";
+                MySqlCommand cmd = new MySqlCommand(selecionar, Banco.conexao);
+                cmd.Parameters.AddWithValue("@status", cmbStatus.Text);
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                dgvServico.DataSource = dt;
+                dgvServico.Columns[0].Visible = false;
+                dgvServico.Columns[1].HeaderText = "NOME";
+                dgvServico.Columns[2].HeaderText = "DESCRIÇÃO";
+                dgvServico.Columns[3].HeaderText = "VALOR";
+                dgvServico.Columns[4].HeaderText = "TEMPO";
+                dgvServico.Columns[5].Visible = false;
+                dgvServico.Columns[6].Visible = false;
+                dgvServico.Columns[7].HeaderText = "TIPO";
+                dgvServico.Columns[8].Visible = false;
+                dgvServico.Columns[9].HeaderText = "STATUS";
+
+                MostrarImagem();
+
+
+                dgvServico.ClearSelection();
+
+                Banco.Desconectar();
+            }
+            catch (Exception erro)
+            {
+                MessageBox.Show("Erro ao carregar os serviços. " + erro);
+                throw;
+            }
         }
 
 
@@ -127,6 +199,35 @@ namespace mestremotores_gabrielfernando
             if(e.RowIndex >= 0 && e.ColumnIndex == 0)
             {
                 pctServico.Visible =false;
+            }
+        }
+
+        private void txtServico_TextChanged(object sender, EventArgs e)
+        {
+            if (txtServico.Text.Length > 0)
+            {
+                cmbStatus.Enabled = false;
+                CarregarServicoNome();
+
+            }
+            else
+            {
+                cmbStatus.Enabled = true;
+                CarregarServico();
+            }
+        }
+
+        private void cmbStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbStatus.Text == "ATIVO" || cmbStatus.Text == "INATIVO" || cmbStatus.Text == "DESATIVADO")
+            {
+                txtServico.Enabled = false;
+                CarregarServicoStatus();
+            }
+            else
+            {
+                txtServico.Enabled = true;
+                CarregarServico();
             }
         }
     }

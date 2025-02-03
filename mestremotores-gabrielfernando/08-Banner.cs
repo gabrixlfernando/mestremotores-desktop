@@ -57,6 +57,62 @@ namespace mestremotores_gabrielfernando
                 MessageBox.Show("Erro ao carregar os banners. " + erro);
                 throw;
             }
+        }private void CarregarBannerNome()
+        {
+            try
+            {
+                Banco.Conectar();
+                string selecionar = "SELECT * FROM tbl_banner WHERE nome_banner LIKE @nome ORDER BY nome_banner;";
+                MySqlCommand cmd = new MySqlCommand(selecionar, Banco.conexao);
+                cmd.Parameters.AddWithValue("@nome", "%" + txtBanner.Text + "%");
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                dgvBanner.DataSource = dt;
+                dgvBanner.Columns[0].Visible = false;
+                dgvBanner.Columns[1].HeaderText = "NOME";
+                dgvBanner.Columns[2].Visible = false;
+                dgvBanner.Columns[3].HeaderText = "ALT";               
+                dgvBanner.Columns[4].HeaderText = "STATUS";
+
+                MostrarImagem();
+                dgvBanner.ClearSelection();
+
+                Banco.Desconectar();
+            }
+            catch (Exception erro)
+            {
+                MessageBox.Show("Erro ao carregar os banners. " + erro);
+                throw;
+            }
+        }private void CarregarBannerStatus()
+        {
+            try
+            {
+                Banco.Conectar();
+                string selecionar = "SELECT * FROM tbl_banner WHERE status_banner = @status ORDER BY nome_banner;";
+                MySqlCommand cmd = new MySqlCommand(selecionar, Banco.conexao);
+                cmd.Parameters.AddWithValue("@status", cmbStatus.Text);
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                dgvBanner.DataSource = dt;
+                dgvBanner.Columns[0].Visible = false;
+                dgvBanner.Columns[1].HeaderText = "NOME";
+                dgvBanner.Columns[2].Visible = false;
+                dgvBanner.Columns[3].HeaderText = "ALT";               
+                dgvBanner.Columns[4].HeaderText = "STATUS";
+
+                MostrarImagem();
+                dgvBanner.ClearSelection();
+
+                Banco.Desconectar();
+            }
+            catch (Exception erro)
+            {
+                MessageBox.Show("Erro ao carregar os banners. " + erro);
+                throw;
+            }
         }
 
         private void MostrarImagem()
@@ -116,6 +172,35 @@ namespace mestremotores_gabrielfernando
             if (e.RowIndex >= 0 && e.ColumnIndex == 0)
             {
                 pctBanner.Visible = false;
+            }
+        }
+
+        private void txtBanner_TextChanged(object sender, EventArgs e)
+        {
+            if (txtBanner.Text.Length > 0)
+            {
+                cmbStatus.Enabled = false;
+                CarregarBannerNome();
+
+            }
+            else
+            {
+                cmbStatus.Enabled = true;
+                CarregarBanner();
+            }
+        }
+
+        private void cmbStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbStatus.Text == "ATIVO" || cmbStatus.Text == "INATIVO" || cmbStatus.Text == "DESATIVADO")
+            {
+                txtBanner.Enabled = false;
+                CarregarBannerStatus();
+            }
+            else
+            {
+                txtBanner.Enabled = true;
+                CarregarBanner();
             }
         }
     }

@@ -57,6 +57,60 @@ namespace mestremotores_gabrielfernando
                 MessageBox.Show("Erro ao carregar a galeria. " + erro);
                 throw;
             }
+        }private void CarregarGaleriaNome()
+        {
+            try
+            {
+                Banco.Conectar();
+                string selecionar = "SELECT * FROM tbl_galeria WHERE nome_galeria LIKE @nome ORDER BY nome_galeria;";
+                MySqlCommand cmd = new MySqlCommand(selecionar, Banco.conexao);
+                cmd.Parameters.AddWithValue("@nome", "%" + txtGaleria.Text + "%");
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                dgvGaleria.DataSource = dt;
+                dgvGaleria.Columns[0].Visible = false;
+                dgvGaleria.Columns[1].HeaderText = "NOME";
+                dgvGaleria.Columns[2].Visible = false;
+                dgvGaleria.Columns[3].HeaderText = "ALT";
+                dgvGaleria.Columns[4].HeaderText = "STATUS";
+                MostrarImagem();
+                dgvGaleria.ClearSelection();
+
+                Banco.Desconectar();
+            }
+            catch (Exception erro)
+            {
+                MessageBox.Show("Erro ao carregar a galeria. " + erro);
+                throw;
+            }
+        }private void CarregarGaleriaStatus()
+        {
+            try
+            {
+                Banco.Conectar();
+                string selecionar = "SELECT * FROM tbl_galeria WHERE status_galeria = @status ORDER BY nome_galeria;";
+                MySqlCommand cmd = new MySqlCommand(selecionar, Banco.conexao);
+                cmd.Parameters.AddWithValue("@status", cmbStatus.Text);
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                dgvGaleria.DataSource = dt;
+                dgvGaleria.Columns[0].Visible = false;
+                dgvGaleria.Columns[1].HeaderText = "NOME";
+                dgvGaleria.Columns[2].Visible = false;
+                dgvGaleria.Columns[3].HeaderText = "ALT";
+                dgvGaleria.Columns[4].HeaderText = "STATUS";
+                MostrarImagem();
+                dgvGaleria.ClearSelection();
+
+                Banco.Desconectar();
+            }
+            catch (Exception erro)
+            {
+                MessageBox.Show("Erro ao carregar a galeria. " + erro);
+                throw;
+            }
         }
 
         private void MostrarImagem()
@@ -116,6 +170,35 @@ namespace mestremotores_gabrielfernando
             if (e.RowIndex >= 0 && e.ColumnIndex == 0)
             {
                 pctGaleria.Visible = false;
+            }
+        }
+
+        private void txtGaleria_TextChanged(object sender, EventArgs e)
+        {
+            if (txtGaleria.Text.Length > 0)
+            {
+                cmbStatus.Enabled = false;
+                CarregarGaleriaNome();
+
+            }
+            else
+            {
+                cmbStatus.Enabled = true;
+                CarregarGaleria();
+            }
+        }
+
+        private void cmbStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbStatus.Text == "ATIVO" || cmbStatus.Text == "INATIVO" || cmbStatus.Text == "DESATIVADO")
+            {
+                txtGaleria.Enabled = false;
+                CarregarGaleriaStatus();
+            }
+            else
+            {
+                txtGaleria.Enabled = true;
+                CarregarGaleria();
             }
         }
     }

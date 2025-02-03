@@ -38,7 +38,7 @@
             this.dgvEspecialidade = new System.Windows.Forms.DataGridView();
             this.pnlCliente = new System.Windows.Forms.Panel();
             this.cmbStatus = new System.Windows.Forms.ComboBox();
-            this.txtNome = new System.Windows.Forms.TextBox();
+            this.txtEspecialidade = new System.Windows.Forms.TextBox();
             this.lblStatus = new System.Windows.Forms.Label();
             this.lblNome = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
@@ -148,7 +148,7 @@
             // 
             this.pnlCliente.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(50)))), ((int)(((byte)(90)))));
             this.pnlCliente.Controls.Add(this.cmbStatus);
-            this.pnlCliente.Controls.Add(this.txtNome);
+            this.pnlCliente.Controls.Add(this.txtEspecialidade);
             this.pnlCliente.Controls.Add(this.lblStatus);
             this.pnlCliente.Controls.Add(this.lblNome);
             this.pnlCliente.Location = new System.Drawing.Point(107, 41);
@@ -168,13 +168,15 @@
             this.cmbStatus.Name = "cmbStatus";
             this.cmbStatus.Size = new System.Drawing.Size(239, 21);
             this.cmbStatus.TabIndex = 3;
+            this.cmbStatus.SelectedIndexChanged += new System.EventHandler(this.cmbStatus_SelectedIndexChanged);
             // 
-            // txtNome
+            // txtEspecialidade
             // 
-            this.txtNome.Location = new System.Drawing.Point(77, 20);
-            this.txtNome.Name = "txtNome";
-            this.txtNome.Size = new System.Drawing.Size(435, 20);
-            this.txtNome.TabIndex = 2;
+            this.txtEspecialidade.Location = new System.Drawing.Point(77, 20);
+            this.txtEspecialidade.Name = "txtEspecialidade";
+            this.txtEspecialidade.Size = new System.Drawing.Size(435, 20);
+            this.txtEspecialidade.TabIndex = 2;
+            this.txtEspecialidade.TextChanged += new System.EventHandler(this.txtEspecialidade_TextChanged);
             // 
             // lblStatus
             // 
@@ -235,7 +237,7 @@
         private System.Windows.Forms.DataGridView dgvEspecialidade;
         private System.Windows.Forms.Panel pnlCliente;
         private System.Windows.Forms.ComboBox cmbStatus;
-        private System.Windows.Forms.TextBox txtNome;
+        private System.Windows.Forms.TextBox txtEspecialidade;
         private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.Label lblNome;
     }

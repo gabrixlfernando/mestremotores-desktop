@@ -57,6 +57,62 @@ namespace mestremotores_gabrielfernando
                 MessageBox.Show("Erro ao carregar os videos. " + erro);
                 throw;
             }
+        }private void CarregarVideoNome()
+        {
+            try
+            {
+                Banco.Conectar();
+                string selecionar = "SELECT * FROM tbl_video  WHERE nome_video LIKE @nome ORDER BY nome_video;";
+                MySqlCommand cmd = new MySqlCommand(selecionar, Banco.conexao);
+                cmd.Parameters.AddWithValue("@nome", "%" + txtVideo.Text + "%");
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                dgvVideo.DataSource = dt;
+                dgvVideo.Columns[0].Visible = false;
+                dgvVideo.Columns[1].HeaderText = "NOME";
+                dgvVideo.Columns[2].Visible = false;
+                dgvVideo.Columns[3].HeaderText = "ALT";
+                dgvVideo.Columns[4].HeaderText = "URL";               
+                dgvVideo.Columns[5].HeaderText = "STATUS";
+                MostrarImagem();
+                dgvVideo.ClearSelection();
+
+                Banco.Desconectar();
+            }
+            catch (Exception erro)
+            {
+                MessageBox.Show("Erro ao carregar os videos. " + erro);
+                throw;
+            }
+        }private void CarregarVideoStatus()
+        {
+            try
+            {
+                Banco.Conectar();
+                string selecionar = "SELECT * FROM tbl_video  WHERE status_video = @status ORDER BY nome_video;";
+                MySqlCommand cmd = new MySqlCommand(selecionar, Banco.conexao);
+                cmd.Parameters.AddWithValue("@status", cmbStatus.Text);
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                dgvVideo.DataSource = dt;
+                dgvVideo.Columns[0].Visible = false;
+                dgvVideo.Columns[1].HeaderText = "NOME";
+                dgvVideo.Columns[2].Visible = false;
+                dgvVideo.Columns[3].HeaderText = "ALT";
+                dgvVideo.Columns[4].HeaderText = "URL";               
+                dgvVideo.Columns[5].HeaderText = "STATUS";
+                MostrarImagem();
+                dgvVideo.ClearSelection();
+
+                Banco.Desconectar();
+            }
+            catch (Exception erro)
+            {
+                MessageBox.Show("Erro ao carregar os videos. " + erro);
+                throw;
+            }
         }
 
         private void MostrarImagem()
@@ -116,6 +172,35 @@ namespace mestremotores_gabrielfernando
             if (e.RowIndex >= 0 && e.ColumnIndex == 0)
             {
                 pctVideo.Visible = false;
+            }
+        }
+
+        private void txtVideo_TextChanged(object sender, EventArgs e)
+        {
+            if (txtVideo.Text.Length > 0)
+            {
+                cmbStatus.Enabled = false;
+                CarregarVideoNome();
+
+            }
+            else
+            {
+                cmbStatus.Enabled = true;
+                CarregarVideo();
+            }
+        }
+
+        private void cmbStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbStatus.Text == "ATIVO" || cmbStatus.Text == "INATIVO" || cmbStatus.Text == "DESATIVADO")
+            {
+                txtVideo.Enabled = false;
+                CarregarVideoStatus();
+            }
+            else
+            {
+                txtVideo.Enabled = true;
+                CarregarVideo();
             }
         }
     }

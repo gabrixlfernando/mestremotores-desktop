@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlCliente = new System.Windows.Forms.Panel();
             this.cmbStatus = new System.Windows.Forms.ComboBox();
-            this.txtNome = new System.Windows.Forms.TextBox();
+            this.txtGaleria = new System.Windows.Forms.TextBox();
             this.lblStatus = new System.Windows.Forms.Label();
             this.lblNome = new System.Windows.Forms.Label();
             this.btnExcluir = new System.Windows.Forms.Button();
@@ -50,7 +50,7 @@
             // 
             this.pnlCliente.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(50)))), ((int)(((byte)(90)))));
             this.pnlCliente.Controls.Add(this.cmbStatus);
-            this.pnlCliente.Controls.Add(this.txtNome);
+            this.pnlCliente.Controls.Add(this.txtGaleria);
             this.pnlCliente.Controls.Add(this.lblStatus);
             this.pnlCliente.Controls.Add(this.lblNome);
             this.pnlCliente.Location = new System.Drawing.Point(111, 45);
@@ -70,13 +70,15 @@
             this.cmbStatus.Name = "cmbStatus";
             this.cmbStatus.Size = new System.Drawing.Size(239, 21);
             this.cmbStatus.TabIndex = 3;
+            this.cmbStatus.SelectedIndexChanged += new System.EventHandler(this.cmbStatus_SelectedIndexChanged);
             // 
-            // txtNome
+            // txtGaleria
             // 
-            this.txtNome.Location = new System.Drawing.Point(77, 20);
-            this.txtNome.Name = "txtNome";
-            this.txtNome.Size = new System.Drawing.Size(435, 20);
-            this.txtNome.TabIndex = 2;
+            this.txtGaleria.Location = new System.Drawing.Point(77, 20);
+            this.txtGaleria.Name = "txtGaleria";
+            this.txtGaleria.Size = new System.Drawing.Size(435, 20);
+            this.txtGaleria.TabIndex = 2;
+            this.txtGaleria.TextChanged += new System.EventHandler(this.txtGaleria_TextChanged);
             // 
             // lblStatus
             // 
@@ -144,14 +146,14 @@
             this.dgvGaleria.AllowUserToResizeRows = false;
             this.dgvGaleria.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvGaleria.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(50)))), ((int)(((byte)(90)))));
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(50)))), ((int)(((byte)(90)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(76)))), ((int)(((byte)(146)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvGaleria.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(50)))), ((int)(((byte)(90)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(76)))), ((int)(((byte)(146)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvGaleria.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvGaleria.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvGaleria.EnableHeadersVisualStyles = false;
             this.dgvGaleria.Location = new System.Drawing.Point(111, 101);
@@ -230,7 +232,7 @@
 
         private System.Windows.Forms.Panel pnlCliente;
         private System.Windows.Forms.ComboBox cmbStatus;
-        private System.Windows.Forms.TextBox txtNome;
+        private System.Windows.Forms.TextBox txtGaleria;
         private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.Label lblNome;
         private System.Windows.Forms.Button btnExcluir;

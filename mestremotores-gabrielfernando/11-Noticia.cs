@@ -59,6 +59,65 @@ namespace mestremotores_gabrielfernando
                 MessageBox.Show("Erro ao carregar as noticias. " + erro);
                 throw;
             }
+        } private void CarregarNoticiaNome()
+        {
+            try
+            {
+                Banco.Conectar();
+                string selecionar = "SELECT * FROM tbl_noticia WHERE nome_noticia LIKE @nome ORDER BY nome_noticia;";
+                MySqlCommand cmd = new MySqlCommand(selecionar, Banco.conexao);
+                cmd.Parameters.AddWithValue("@nome", "%" + txtNoticia.Text + "%");
+                
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                dgvNoticia.DataSource = dt;
+                dgvNoticia.Columns[0].Visible = false;
+                dgvNoticia.Columns[1].HeaderText = "NOME";
+                dgvNoticia.Columns[2].HeaderText = "DESCRIÇÃO";
+                dgvNoticia.Columns[3].Visible = false;
+                dgvNoticia.Columns[4].Visible = false;
+                dgvNoticia.Columns[5].Visible = false;                            
+                dgvNoticia.Columns[6].HeaderText = "STATUS";
+                MostrarImagem();
+                dgvNoticia.ClearSelection();
+
+                Banco.Desconectar();
+            }
+            catch (Exception erro)
+            {
+                MessageBox.Show("Erro ao carregar as noticias. " + erro);
+                throw;
+            }
+        } private void CarregarNoticiaStatus()
+        {
+            try
+            {
+                Banco.Conectar();
+                string selecionar = "SELECT * FROM tbl_noticia WHERE status_noticia = @status ORDER BY nome_noticia;";
+                MySqlCommand cmd = new MySqlCommand(selecionar, Banco.conexao);
+                cmd.Parameters.AddWithValue("@status", cmbStatus.Text);
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                dgvNoticia.DataSource = dt;
+                dgvNoticia.Columns[0].Visible = false;
+                dgvNoticia.Columns[1].HeaderText = "NOME";
+                dgvNoticia.Columns[2].HeaderText = "DESCRIÇÃO";
+                dgvNoticia.Columns[3].Visible = false;
+                dgvNoticia.Columns[4].Visible = false;
+                dgvNoticia.Columns[5].Visible = false;                            
+                dgvNoticia.Columns[6].HeaderText = "STATUS";
+                MostrarImagem();
+                dgvNoticia.ClearSelection();
+
+                Banco.Desconectar();
+            }
+            catch (Exception erro)
+            {
+                MessageBox.Show("Erro ao carregar as noticias. " + erro);
+                throw;
+            }
         }
 
         private void MostrarImagem()
@@ -119,6 +178,35 @@ namespace mestremotores_gabrielfernando
             if (e.RowIndex >= 0 && e.ColumnIndex == 0)
             {
                 pctNoticia.Visible = false;
+            }
+        }
+
+        private void txtNoticia_TextChanged(object sender, EventArgs e)
+        {
+            if (txtNoticia.Text.Length > 0)
+            {
+                cmbStatus.Enabled = false;
+                CarregarNoticiaNome();
+
+            }
+            else
+            {
+                cmbStatus.Enabled = true;
+                CarregarNoticia();
+            }
+        }
+
+        private void cmbStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbStatus.Text == "ATIVO" || cmbStatus.Text == "INATIVO" || cmbStatus.Text == "DESATIVADO")
+            {
+                txtNoticia.Enabled = false;
+                CarregarNoticiaStatus();
+            }
+            else
+            {
+                txtNoticia.Enabled = true;
+                CarregarNoticia();
             }
         }
     }

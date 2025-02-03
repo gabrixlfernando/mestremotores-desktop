@@ -58,10 +58,108 @@ namespace mestremotores_gabrielfernando
                 throw;
             }
         }
+        private void CarregarFuncionarioNome()
+        {
+            try
+            {
+                Banco.Conectar();
+                string selecionar = "SELECT * FROM tbl_funcionario WHERE nome_funcionario LIKE @nome ORDER BY nome_funcionario;";
+                MySqlCommand cmd = new MySqlCommand(selecionar, Banco.conexao);
+                cmd.Parameters.AddWithValue("@nome", "%" + txtFuncionario.Text + "%");
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                dgvFuncionario.DataSource = dt;
+                dgvFuncionario.Columns[0].Visible = false;
+                dgvFuncionario.Columns[1].HeaderText = "NOME";
+                dgvFuncionario.Columns[2].Visible = false;
+                dgvFuncionario.Columns[3].HeaderText = "ENDEREÇO";
+                dgvFuncionario.Columns[4].HeaderText = "BAIRRO";
+                dgvFuncionario.Columns[5].HeaderText = "CIDADE";
+                dgvFuncionario.Columns[6].HeaderText = "UF";
+                dgvFuncionario.Columns[7].HeaderText = "TELEFONE";
+                dgvFuncionario.Columns[8].HeaderText = "E-MAIL";
+                dgvFuncionario.Columns[9].Visible = false;
+                dgvFuncionario.Columns[10].Visible = false;
+                dgvFuncionario.Columns[11].HeaderText = "STATUS";
+                dgvFuncionario.Columns[12].Visible = false;
+                dgvFuncionario.ClearSelection();
+
+                Banco.Desconectar();
+            }
+            catch (Exception erro)
+            {
+                MessageBox.Show("Erro ao carregar os funcionarios. " + erro);
+                throw;
+            }
+        }private void CarregarFuncionarioStatus()
+        {
+            try
+            {
+                Banco.Conectar();
+                string selecionar = "SELECT * FROM tbl_funcionario WHERE status_funcionario = @status ORDER BY nome_funcionario;";
+                MySqlCommand cmd = new MySqlCommand(selecionar, Banco.conexao);
+                cmd.Parameters.AddWithValue("@status", cmbStatus.Text);
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                dgvFuncionario.DataSource = dt;
+                dgvFuncionario.Columns[0].Visible = false;
+                dgvFuncionario.Columns[1].HeaderText = "NOME";
+                dgvFuncionario.Columns[2].Visible = false;
+                dgvFuncionario.Columns[3].HeaderText = "ENDEREÇO";
+                dgvFuncionario.Columns[4].HeaderText = "BAIRRO";
+                dgvFuncionario.Columns[5].HeaderText = "CIDADE";
+                dgvFuncionario.Columns[6].HeaderText = "UF";
+                dgvFuncionario.Columns[7].HeaderText = "TELEFONE";
+                dgvFuncionario.Columns[8].HeaderText = "E-MAIL";
+                dgvFuncionario.Columns[9].Visible = false;
+                dgvFuncionario.Columns[10].Visible = false;
+                dgvFuncionario.Columns[11].HeaderText = "STATUS";
+                dgvFuncionario.Columns[12].Visible = false;
+                dgvFuncionario.ClearSelection();
+
+                Banco.Desconectar();
+            }
+            catch (Exception erro)
+            {
+                MessageBox.Show("Erro ao carregar os funcionarios. " + erro);
+                throw;
+            }
+        }
 
         private void frmFuncionario_Load(object sender, EventArgs e)
         {
             CarregarFuncionario();
+        }
+
+        private void txtFuncionario_TextChanged(object sender, EventArgs e)
+        {
+            if (txtFuncionario.Text.Length > 0)
+            {
+                cmbStatus.Enabled = false;
+                CarregarFuncionarioNome();
+
+            }
+            else
+            {
+                cmbStatus.Enabled = true;
+                CarregarFuncionario();
+            }
+        }
+
+        private void cmbStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbStatus.Text == "ATIVO" || cmbStatus.Text == "INATIVO" || cmbStatus.Text == "DESATIVADO")
+            {
+                txtFuncionario.Enabled = false;
+                CarregarFuncionarioStatus();
+            }
+            else
+            {
+                txtFuncionario.Enabled = true;
+                CarregarFuncionario();
+            }
         }
     }
 }
