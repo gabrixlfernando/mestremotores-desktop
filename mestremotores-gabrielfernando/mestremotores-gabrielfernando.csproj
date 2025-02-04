@@ -192,6 +192,12 @@
     <Compile Include="04-Cliente.Designer.cs">
       <DependentUpon>04-Cliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="cadServico.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="cadServico.Designer.cs">
+      <DependentUpon>cadServico.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="01-Login.resx">
@@ -232,6 +238,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="13-Galeria.resx">
       <DependentUpon>13-Galeria.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="cadServico.aa-DJ.resx">
+      <DependentUpon>cadServico.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="cadServico.resx">
+      <DependentUpon>cadServico.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -49,7 +49,7 @@ namespace mestremotores_gabrielfernando
                 dgvNoticia.Columns[4].Visible = false;
                 dgvNoticia.Columns[5].Visible = false;                            
                 dgvNoticia.Columns[6].HeaderText = "STATUS";
-                MostrarImagem();
+                //MostrarImagem();
                 dgvNoticia.ClearSelection();
 
                 Banco.Desconectar();
@@ -72,14 +72,14 @@ namespace mestremotores_gabrielfernando
                 DataTable dt = new DataTable();
                 da.Fill(dt);
                 dgvNoticia.DataSource = dt;
-                dgvNoticia.Columns[0].Visible = false;
-                dgvNoticia.Columns[1].HeaderText = "NOME";
-                dgvNoticia.Columns[2].HeaderText = "DESCRIÇÃO";
-                dgvNoticia.Columns[3].Visible = false;
-                dgvNoticia.Columns[4].Visible = false;
-                dgvNoticia.Columns[5].Visible = false;                            
-                dgvNoticia.Columns[6].HeaderText = "STATUS";
-                MostrarImagem();
+                //dgvNoticia.Columns[0].Visible = false;
+                //dgvNoticia.Columns[1].HeaderText = "NOME";
+                //dgvNoticia.Columns[2].HeaderText = "DESCRIÇÃO";
+                //dgvNoticia.Columns[3].Visible = false;
+                //dgvNoticia.Columns[4].Visible = false;
+                //dgvNoticia.Columns[5].Visible = false;                            
+                //dgvNoticia.Columns[6].HeaderText = "STATUS";
+                //MostrarImagem();
                 dgvNoticia.ClearSelection();
 
                 Banco.Desconectar();
@@ -101,14 +101,14 @@ namespace mestremotores_gabrielfernando
                 DataTable dt = new DataTable();
                 da.Fill(dt);
                 dgvNoticia.DataSource = dt;
-                dgvNoticia.Columns[0].Visible = false;
-                dgvNoticia.Columns[1].HeaderText = "NOME";
-                dgvNoticia.Columns[2].HeaderText = "DESCRIÇÃO";
-                dgvNoticia.Columns[3].Visible = false;
-                dgvNoticia.Columns[4].Visible = false;
-                dgvNoticia.Columns[5].Visible = false;                            
-                dgvNoticia.Columns[6].HeaderText = "STATUS";
-                MostrarImagem();
+                //dgvNoticia.Columns[0].Visible = false;
+                //dgvNoticia.Columns[1].HeaderText = "NOME";
+                //dgvNoticia.Columns[2].HeaderText = "DESCRIÇÃO";
+                //dgvNoticia.Columns[3].Visible = false;
+                //dgvNoticia.Columns[4].Visible = false;
+                //dgvNoticia.Columns[5].Visible = false;                            
+                //dgvNoticia.Columns[6].HeaderText = "STATUS";
+                //MostrarImagem();
                 dgvNoticia.ClearSelection();
 
                 Banco.Desconectar();
@@ -123,9 +123,15 @@ namespace mestremotores_gabrielfernando
         private void MostrarImagem()
         {
             string caminhoBase = @"C:\xampp\htdocs\ti26\mestremotores\";
+            string nomeColunaImagem = "colunaImagem";
+            if (dgvNoticia.Columns.Contains(nomeColunaImagem))
+            {
+                dgvNoticia.Columns.Remove(nomeColunaImagem);
+            }
 
             DataGridViewImageColumn imgColumn = new DataGridViewImageColumn();
             imgColumn.HeaderText = "FOTO";
+            imgColumn.Name = nomeColunaImagem;
             imgColumn.ImageLayout = DataGridViewImageCellLayout.Zoom;
             dgvNoticia.Columns.Insert(0, imgColumn);
 
@@ -152,6 +158,7 @@ namespace mestremotores_gabrielfernando
         private void frmNoticia_Load(object sender, EventArgs e)
         {
             CarregarNoticia();
+            MostrarImagem();
         }
 
         private void dgvNoticia_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
@@ -187,12 +194,14 @@ namespace mestremotores_gabrielfernando
             {
                 cmbStatus.Enabled = false;
                 CarregarNoticiaNome();
+                MostrarImagem();
 
             }
             else
             {
                 cmbStatus.Enabled = true;
-                CarregarNoticia();
+                CarregarNoticiaNome();
+                MostrarImagem();
             }
         }
 
@@ -202,11 +211,13 @@ namespace mestremotores_gabrielfernando
             {
                 txtNoticia.Enabled = false;
                 CarregarNoticiaStatus();
+                MostrarImagem();
             }
             else
             {
                 txtNoticia.Enabled = true;
-                CarregarNoticia();
+                CarregarNoticiaNome();
+                MostrarImagem();
             }
         }
     }

@@ -47,7 +47,7 @@ namespace mestremotores_gabrielfernando
                 dgvBanner.Columns[3].HeaderText = "ALT";               
                 dgvBanner.Columns[4].HeaderText = "STATUS";
 
-                MostrarImagem();
+                //MostrarImagem();
                 dgvBanner.ClearSelection();
 
                 Banco.Desconectar();
@@ -69,13 +69,13 @@ namespace mestremotores_gabrielfernando
                 DataTable dt = new DataTable();
                 da.Fill(dt);
                 dgvBanner.DataSource = dt;
-                dgvBanner.Columns[0].Visible = false;
-                dgvBanner.Columns[1].HeaderText = "NOME";
-                dgvBanner.Columns[2].Visible = false;
-                dgvBanner.Columns[3].HeaderText = "ALT";               
-                dgvBanner.Columns[4].HeaderText = "STATUS";
+                //dgvBanner.Columns[0].Visible = false;
+                //dgvBanner.Columns[1].HeaderText = "NOME";
+                //dgvBanner.Columns[2].Visible = false;
+                //dgvBanner.Columns[3].HeaderText = "ALT";               
+                //dgvBanner.Columns[4].HeaderText = "STATUS";
 
-                MostrarImagem();
+                //MostrarImagem();
                 dgvBanner.ClearSelection();
 
                 Banco.Desconectar();
@@ -97,13 +97,13 @@ namespace mestremotores_gabrielfernando
                 DataTable dt = new DataTable();
                 da.Fill(dt);
                 dgvBanner.DataSource = dt;
-                dgvBanner.Columns[0].Visible = false;
-                dgvBanner.Columns[1].HeaderText = "NOME";
-                dgvBanner.Columns[2].Visible = false;
-                dgvBanner.Columns[3].HeaderText = "ALT";               
-                dgvBanner.Columns[4].HeaderText = "STATUS";
+                //dgvBanner.Columns[0].Visible = false;
+                //dgvBanner.Columns[1].HeaderText = "NOME";
+                //dgvBanner.Columns[2].Visible = false;
+                //dgvBanner.Columns[3].HeaderText = "ALT";               
+                //dgvBanner.Columns[4].HeaderText = "STATUS";
 
-                MostrarImagem();
+                //MostrarImagem();
                 dgvBanner.ClearSelection();
 
                 Banco.Desconectar();
@@ -118,9 +118,15 @@ namespace mestremotores_gabrielfernando
         private void MostrarImagem()
         {
             string caminhoBase = @"C:\xampp\htdocs\ti26\mestremotores\";
+            string nomeColunaImagem = "colunaImagem";
+            if (dgvBanner.Columns.Contains(nomeColunaImagem))
+            {
+                dgvBanner.Columns.Remove(nomeColunaImagem);
+            }
 
             DataGridViewImageColumn imgColumn = new DataGridViewImageColumn();
             imgColumn.HeaderText = "FOTO";
+            imgColumn.Name = nomeColunaImagem;
             imgColumn.ImageLayout = DataGridViewImageCellLayout.Zoom;
             dgvBanner.Columns.Insert(0, imgColumn);
 
@@ -146,6 +152,7 @@ namespace mestremotores_gabrielfernando
         private void frmBanner_Load(object sender, EventArgs e)
         {
             CarregarBanner();
+            MostrarImagem();
         }
 
         private void dgvBanner_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
@@ -181,12 +188,14 @@ namespace mestremotores_gabrielfernando
             {
                 cmbStatus.Enabled = false;
                 CarregarBannerNome();
+                MostrarImagem();
 
             }
             else
             {
                 cmbStatus.Enabled = true;
-                CarregarBanner();
+                CarregarBannerNome();
+                MostrarImagem();
             }
         }
 
@@ -196,11 +205,13 @@ namespace mestremotores_gabrielfernando
             {
                 txtBanner.Enabled = false;
                 CarregarBannerStatus();
+                MostrarImagem();
             }
             else
             {
                 txtBanner.Enabled = true;
-                CarregarBanner();
+                CarregarBannerNome();
+                MostrarImagem();
             }
         }
     }

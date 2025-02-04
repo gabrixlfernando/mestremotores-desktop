@@ -55,7 +55,7 @@ namespace mestremotores_gabrielfernando
                 dgvServico.Columns[8].Visible = false;
                 dgvServico.Columns[9].HeaderText = "STATUS";
 
-                MostrarImagem();
+                //MostrarImagem();
 
 
                 dgvServico.ClearSelection();
@@ -80,18 +80,18 @@ namespace mestremotores_gabrielfernando
                 DataTable dt = new DataTable();
                 da.Fill(dt);
                 dgvServico.DataSource = dt;
-                dgvServico.Columns[0].Visible = false;
-                dgvServico.Columns[1].HeaderText = "NOME";
-                dgvServico.Columns[2].HeaderText = "DESCRIÇÃO";
-                dgvServico.Columns[3].HeaderText = "VALOR";
-                dgvServico.Columns[4].HeaderText = "TEMPO";
-                dgvServico.Columns[5].Visible = false;
-                dgvServico.Columns[6].Visible = false;
-                dgvServico.Columns[7].HeaderText = "TIPO";
-                dgvServico.Columns[8].Visible = false;
-                dgvServico.Columns[9].HeaderText = "STATUS";
+                //dgvServico.Columns[0].Visible = false;
+                //dgvServico.Columns[1].HeaderText = "NOME";
+                //dgvServico.Columns[2].HeaderText = "DESCRIÇÃO";
+                //dgvServico.Columns[3].HeaderText = "VALOR";
+                //dgvServico.Columns[4].HeaderText = "TEMPO";
+                //dgvServico.Columns[5].Visible = false;
+                //dgvServico.Columns[6].Visible = false;
+                //dgvServico.Columns[7].HeaderText = "TIPO";
+                //dgvServico.Columns[8].Visible = false;
+                //dgvServico.Columns[9].HeaderText = "STATUS";
 
-                MostrarImagem();
+                //MostrarImagem();
 
 
                 dgvServico.ClearSelection();
@@ -116,18 +116,18 @@ namespace mestremotores_gabrielfernando
                 DataTable dt = new DataTable();
                 da.Fill(dt);
                 dgvServico.DataSource = dt;
-                dgvServico.Columns[0].Visible = false;
-                dgvServico.Columns[1].HeaderText = "NOME";
-                dgvServico.Columns[2].HeaderText = "DESCRIÇÃO";
-                dgvServico.Columns[3].HeaderText = "VALOR";
-                dgvServico.Columns[4].HeaderText = "TEMPO";
-                dgvServico.Columns[5].Visible = false;
-                dgvServico.Columns[6].Visible = false;
-                dgvServico.Columns[7].HeaderText = "TIPO";
-                dgvServico.Columns[8].Visible = false;
-                dgvServico.Columns[9].HeaderText = "STATUS";
+                //dgvServico.Columns[0].Visible = false;
+                //dgvServico.Columns[1].HeaderText = "NOME";
+                //dgvServico.Columns[2].HeaderText = "DESCRIÇÃO";
+                //dgvServico.Columns[3].HeaderText = "VALOR";
+                //dgvServico.Columns[4].HeaderText = "TEMPO";
+                //dgvServico.Columns[5].Visible = false;
+                //dgvServico.Columns[6].Visible = false;
+                //dgvServico.Columns[7].HeaderText = "TIPO";
+                //dgvServico.Columns[8].Visible = false;
+                //dgvServico.Columns[9].HeaderText = "STATUS";
 
-                MostrarImagem();
+                //MostrarImagem();
 
 
                 dgvServico.ClearSelection();
@@ -146,8 +146,15 @@ namespace mestremotores_gabrielfernando
         {
             string caminhoBase = @"C:\xampp\htdocs\ti26\mestremotores\";
 
+            string nomeColunaImagem = "colunaImagem";
+            if (dgvServico.Columns.Contains(nomeColunaImagem))
+            {
+                dgvServico.Columns.Remove(nomeColunaImagem);
+            }
+
             DataGridViewImageColumn imgColumn = new DataGridViewImageColumn();
             imgColumn.HeaderText = "FOTO";
+            imgColumn.Name = nomeColunaImagem;
             imgColumn.ImageLayout = DataGridViewImageCellLayout.Zoom;
             dgvServico.Columns.Insert(0, imgColumn);
 
@@ -173,6 +180,7 @@ namespace mestremotores_gabrielfernando
         private void frmServico_Load(object sender, EventArgs e)
         {
             CarregarServico();
+            MostrarImagem();
         }
 
         private void dgvServico_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
@@ -208,12 +216,14 @@ namespace mestremotores_gabrielfernando
             {
                 cmbStatus.Enabled = false;
                 CarregarServicoNome();
+                MostrarImagem();
 
             }
             else
             {
                 cmbStatus.Enabled = true;
-                CarregarServico();
+                CarregarServicoNome();
+                MostrarImagem();
             }
         }
 
@@ -223,12 +233,20 @@ namespace mestremotores_gabrielfernando
             {
                 txtServico.Enabled = false;
                 CarregarServicoStatus();
+                MostrarImagem();
             }
             else
             {
                 txtServico.Enabled = true;
-                CarregarServico();
+                CarregarServicoNome();
+                MostrarImagem();
             }
+        }
+
+        private void btnCadastrar_Click(object sender, EventArgs e)
+        {
+            new frmCadServico().Show();
+            Hide();
         }
     }
 }

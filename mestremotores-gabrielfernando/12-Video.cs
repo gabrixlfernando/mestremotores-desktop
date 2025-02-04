@@ -47,7 +47,7 @@ namespace mestremotores_gabrielfernando
                 dgvVideo.Columns[3].HeaderText = "ALT";
                 dgvVideo.Columns[4].HeaderText = "URL";               
                 dgvVideo.Columns[5].HeaderText = "STATUS";
-                MostrarImagem();
+                //MostrarImagem();
                 dgvVideo.ClearSelection();
 
                 Banco.Desconectar();
@@ -69,13 +69,13 @@ namespace mestremotores_gabrielfernando
                 DataTable dt = new DataTable();
                 da.Fill(dt);
                 dgvVideo.DataSource = dt;
-                dgvVideo.Columns[0].Visible = false;
-                dgvVideo.Columns[1].HeaderText = "NOME";
-                dgvVideo.Columns[2].Visible = false;
-                dgvVideo.Columns[3].HeaderText = "ALT";
-                dgvVideo.Columns[4].HeaderText = "URL";               
-                dgvVideo.Columns[5].HeaderText = "STATUS";
-                MostrarImagem();
+                //dgvVideo.Columns[0].Visible = false;
+                //dgvVideo.Columns[1].HeaderText = "NOME";
+                //dgvVideo.Columns[2].Visible = false;
+                //dgvVideo.Columns[3].HeaderText = "ALT";
+                //dgvVideo.Columns[4].HeaderText = "URL";               
+                //dgvVideo.Columns[5].HeaderText = "STATUS";
+                //MostrarImagem();
                 dgvVideo.ClearSelection();
 
                 Banco.Desconectar();
@@ -97,13 +97,13 @@ namespace mestremotores_gabrielfernando
                 DataTable dt = new DataTable();
                 da.Fill(dt);
                 dgvVideo.DataSource = dt;
-                dgvVideo.Columns[0].Visible = false;
-                dgvVideo.Columns[1].HeaderText = "NOME";
-                dgvVideo.Columns[2].Visible = false;
-                dgvVideo.Columns[3].HeaderText = "ALT";
-                dgvVideo.Columns[4].HeaderText = "URL";               
-                dgvVideo.Columns[5].HeaderText = "STATUS";
-                MostrarImagem();
+                //dgvVideo.Columns[0].Visible = false;
+                //dgvVideo.Columns[1].HeaderText = "NOME";
+                //dgvVideo.Columns[2].Visible = false;
+                //dgvVideo.Columns[3].HeaderText = "ALT";
+                //dgvVideo.Columns[4].HeaderText = "URL";               
+                //dgvVideo.Columns[5].HeaderText = "STATUS";
+                //MostrarImagem();
                 dgvVideo.ClearSelection();
 
                 Banco.Desconectar();
@@ -118,9 +118,15 @@ namespace mestremotores_gabrielfernando
         private void MostrarImagem()
         {
             string caminhoBase = @"C:\xampp\htdocs\ti26\mestremotores\";
+            string nomeColunaImagem = "colunaImagem";
+            if (dgvVideo.Columns.Contains(nomeColunaImagem))
+            {
+                dgvVideo.Columns.Remove(nomeColunaImagem);
+            }
 
             DataGridViewImageColumn imgColumn = new DataGridViewImageColumn();
             imgColumn.HeaderText = "FOTO";
+            imgColumn.Name = nomeColunaImagem;
             imgColumn.ImageLayout = DataGridViewImageCellLayout.Zoom;
             dgvVideo.Columns.Insert(0, imgColumn);
 
@@ -146,6 +152,7 @@ namespace mestremotores_gabrielfernando
         private void frmVideo_Load(object sender, EventArgs e)
         {
             CarregarVideo();
+            MostrarImagem();
         }
 
         private void dgvVideo_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
@@ -181,12 +188,14 @@ namespace mestremotores_gabrielfernando
             {
                 cmbStatus.Enabled = false;
                 CarregarVideoNome();
+                MostrarImagem();
 
             }
             else
             {
                 cmbStatus.Enabled = true;
-                CarregarVideo();
+                CarregarVideoNome();
+                MostrarImagem();
             }
         }
 
@@ -196,11 +205,13 @@ namespace mestremotores_gabrielfernando
             {
                 txtVideo.Enabled = false;
                 CarregarVideoStatus();
+                MostrarImagem();
             }
             else
             {
                 txtVideo.Enabled = true;
-                CarregarVideo();
+                CarregarVideoNome();
+                MostrarImagem();
             }
         }
     }
