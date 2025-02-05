@@ -35,27 +35,27 @@
             this.btnFechar = new System.Windows.Forms.Button();
             this.lblFuncao = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.btnFoto = new System.Windows.Forms.Button();
+            this.lblFoto = new System.Windows.Forms.Label();
+            this.pctFoto = new System.Windows.Forms.PictureBox();
+            this.mskDuração = new System.Windows.Forms.MaskedTextBox();
+            this.cmbStatus = new System.Windows.Forms.ComboBox();
+            this.cmbEspecialidade = new System.Windows.Forms.ComboBox();
+            this.txtTipo = new System.Windows.Forms.TextBox();
+            this.txtValor = new System.Windows.Forms.TextBox();
+            this.txtDescricao = new System.Windows.Forms.TextBox();
+            this.txtNome = new System.Windows.Forms.TextBox();
+            this.lblDuracao = new System.Windows.Forms.Label();
+            this.lblStatus = new System.Windows.Forms.Label();
+            this.lblEspecialidade = new System.Windows.Forms.Label();
+            this.lblTipo = new System.Windows.Forms.Label();
+            this.lblValor = new System.Windows.Forms.Label();
+            this.lblDescricao = new System.Windows.Forms.Label();
+            this.lblNome = new System.Windows.Forms.Label();
             this.btnLimpar = new System.Windows.Forms.Button();
             this.btnSalvar = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.txtNome = new System.Windows.Forms.TextBox();
-            this.txtDescricao = new System.Windows.Forms.TextBox();
-            this.txtValor = new System.Windows.Forms.TextBox();
-            this.txtTipo = new System.Windows.Forms.TextBox();
-            this.cmbEspecialidade = new System.Windows.Forms.ComboBox();
-            this.cmbStatus = new System.Windows.Forms.ComboBox();
-            this.mskDuração = new System.Windows.Forms.MaskedTextBox();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.pctFoto = new System.Windows.Forms.PictureBox();
             this.mySqlCommand1 = new MySql.Data.MySqlClient.MySqlCommand();
-            this.label10 = new System.Windows.Forms.Label();
-            this.btnFoto = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -112,22 +112,143 @@
             this.panel3.Controls.Add(this.txtValor);
             this.panel3.Controls.Add(this.txtDescricao);
             this.panel3.Controls.Add(this.txtNome);
-            this.panel3.Controls.Add(this.label6);
-            this.panel3.Controls.Add(this.label9);
-            this.panel3.Controls.Add(this.label8);
-            this.panel3.Controls.Add(this.label7);
-            this.panel3.Controls.Add(this.label5);
-            this.panel3.Controls.Add(this.label4);
-            this.panel3.Controls.Add(this.label3);
+            this.panel3.Controls.Add(this.lblDuracao);
+            this.panel3.Controls.Add(this.lblStatus);
+            this.panel3.Controls.Add(this.lblEspecialidade);
+            this.panel3.Controls.Add(this.lblTipo);
+            this.panel3.Controls.Add(this.lblValor);
+            this.panel3.Controls.Add(this.lblDescricao);
+            this.panel3.Controls.Add(this.lblNome);
             this.panel3.ForeColor = System.Drawing.SystemColors.ControlLight;
             resources.ApplyResources(this.panel3, "panel3");
             this.panel3.Name = "panel3";
             // 
-            // label3
+            // panel4
             // 
-            resources.ApplyResources(this.label3, "label3");
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Name = "label3";
+            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(76)))), ((int)(((byte)(146)))));
+            this.panel4.Controls.Add(this.btnFoto);
+            this.panel4.Controls.Add(this.lblFoto);
+            this.panel4.Controls.Add(this.pctFoto);
+            resources.ApplyResources(this.panel4, "panel4");
+            this.panel4.Name = "panel4";
+            // 
+            // btnFoto
+            // 
+            this.btnFoto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(76)))), ((int)(((byte)(146)))));
+            resources.ApplyResources(this.btnFoto, "btnFoto");
+            this.btnFoto.Name = "btnFoto";
+            this.btnFoto.UseVisualStyleBackColor = false;
+            this.btnFoto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.btnFoto_KeyPress);
+            // 
+            // lblFoto
+            // 
+            resources.ApplyResources(this.lblFoto, "lblFoto");
+            this.lblFoto.BackColor = System.Drawing.Color.Transparent;
+            this.lblFoto.ForeColor = System.Drawing.Color.White;
+            this.lblFoto.Name = "lblFoto";
+            // 
+            // pctFoto
+            // 
+            this.pctFoto.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            resources.ApplyResources(this.pctFoto, "pctFoto");
+            this.pctFoto.Name = "pctFoto";
+            this.pctFoto.TabStop = false;
+            // 
+            // mskDuração
+            // 
+            resources.ApplyResources(this.mskDuração, "mskDuração");
+            this.mskDuração.Name = "mskDuração";
+            this.mskDuração.ValidatingType = typeof(System.DateTime);
+            this.mskDuração.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.mskDuração_KeyPress);
+            // 
+            // cmbStatus
+            // 
+            this.cmbStatus.FormattingEnabled = true;
+            this.cmbStatus.Items.AddRange(new object[] {
+            resources.GetString("cmbStatus.Items"),
+            resources.GetString("cmbStatus.Items1"),
+            resources.GetString("cmbStatus.Items2"),
+            resources.GetString("cmbStatus.Items3")});
+            resources.ApplyResources(this.cmbStatus, "cmbStatus");
+            this.cmbStatus.Name = "cmbStatus";
+            this.cmbStatus.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbStatus_KeyPress);
+            // 
+            // cmbEspecialidade
+            // 
+            this.cmbEspecialidade.FormattingEnabled = true;
+            resources.ApplyResources(this.cmbEspecialidade, "cmbEspecialidade");
+            this.cmbEspecialidade.Name = "cmbEspecialidade";
+            this.cmbEspecialidade.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbEspecialidade_KeyPress);
+            // 
+            // txtTipo
+            // 
+            this.txtTipo.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            resources.ApplyResources(this.txtTipo, "txtTipo");
+            this.txtTipo.Name = "txtTipo";
+            this.txtTipo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTipo_KeyPress);
+            // 
+            // txtValor
+            // 
+            this.txtValor.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            resources.ApplyResources(this.txtValor, "txtValor");
+            this.txtValor.Name = "txtValor";
+            this.txtValor.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtValor_KeyPress);
+            // 
+            // txtDescricao
+            // 
+            this.txtDescricao.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            resources.ApplyResources(this.txtDescricao, "txtDescricao");
+            this.txtDescricao.Name = "txtDescricao";
+            this.txtDescricao.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDescricao_KeyPress);
+            // 
+            // txtNome
+            // 
+            this.txtNome.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            resources.ApplyResources(this.txtNome, "txtNome");
+            this.txtNome.Name = "txtNome";
+            this.txtNome.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNome_KeyPress);
+            // 
+            // lblDuracao
+            // 
+            resources.ApplyResources(this.lblDuracao, "lblDuracao");
+            this.lblDuracao.ForeColor = System.Drawing.Color.White;
+            this.lblDuracao.Name = "lblDuracao";
+            // 
+            // lblStatus
+            // 
+            resources.ApplyResources(this.lblStatus, "lblStatus");
+            this.lblStatus.ForeColor = System.Drawing.Color.White;
+            this.lblStatus.Name = "lblStatus";
+            // 
+            // lblEspecialidade
+            // 
+            resources.ApplyResources(this.lblEspecialidade, "lblEspecialidade");
+            this.lblEspecialidade.ForeColor = System.Drawing.Color.White;
+            this.lblEspecialidade.Name = "lblEspecialidade";
+            // 
+            // lblTipo
+            // 
+            resources.ApplyResources(this.lblTipo, "lblTipo");
+            this.lblTipo.ForeColor = System.Drawing.Color.White;
+            this.lblTipo.Name = "lblTipo";
+            // 
+            // lblValor
+            // 
+            resources.ApplyResources(this.lblValor, "lblValor");
+            this.lblValor.ForeColor = System.Drawing.Color.White;
+            this.lblValor.Name = "lblValor";
+            // 
+            // lblDescricao
+            // 
+            resources.ApplyResources(this.lblDescricao, "lblDescricao");
+            this.lblDescricao.ForeColor = System.Drawing.Color.White;
+            this.lblDescricao.Name = "lblDescricao";
+            // 
+            // lblNome
+            // 
+            resources.ApplyResources(this.lblNome, "lblNome");
+            this.lblNome.ForeColor = System.Drawing.Color.White;
+            this.lblNome.Name = "lblNome";
             // 
             // btnLimpar
             // 
@@ -147,128 +268,12 @@
             this.btnSalvar.UseVisualStyleBackColor = false;
             this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
             // 
-            // label4
-            // 
-            resources.ApplyResources(this.label4, "label4");
-            this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Name = "label4";
-            // 
-            // label5
-            // 
-            resources.ApplyResources(this.label5, "label5");
-            this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Name = "label5";
-            // 
-            // label6
-            // 
-            resources.ApplyResources(this.label6, "label6");
-            this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Name = "label6";
-            // 
-            // label7
-            // 
-            resources.ApplyResources(this.label7, "label7");
-            this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Name = "label7";
-            // 
-            // label8
-            // 
-            resources.ApplyResources(this.label8, "label8");
-            this.label8.ForeColor = System.Drawing.Color.White;
-            this.label8.Name = "label8";
-            // 
-            // label9
-            // 
-            resources.ApplyResources(this.label9, "label9");
-            this.label9.ForeColor = System.Drawing.Color.White;
-            this.label9.Name = "label9";
-            // 
-            // txtNome
-            // 
-            this.txtNome.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            resources.ApplyResources(this.txtNome, "txtNome");
-            this.txtNome.Name = "txtNome";
-            this.txtNome.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNome_KeyPress);
-            // 
-            // txtDescricao
-            // 
-            this.txtDescricao.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            resources.ApplyResources(this.txtDescricao, "txtDescricao");
-            this.txtDescricao.Name = "txtDescricao";
-            this.txtDescricao.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDescricao_KeyPress);
-            // 
-            // txtValor
-            // 
-            this.txtValor.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            resources.ApplyResources(this.txtValor, "txtValor");
-            this.txtValor.Name = "txtValor";
-            this.txtValor.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtValor_KeyPress);
-            // 
-            // txtTipo
-            // 
-            this.txtTipo.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            resources.ApplyResources(this.txtTipo, "txtTipo");
-            this.txtTipo.Name = "txtTipo";
-            this.txtTipo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTipo_KeyPress);
-            // 
-            // cmbEspecialidade
-            // 
-            this.cmbEspecialidade.FormattingEnabled = true;
-            resources.ApplyResources(this.cmbEspecialidade, "cmbEspecialidade");
-            this.cmbEspecialidade.Name = "cmbEspecialidade";
-            this.cmbEspecialidade.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbEspecialidade_KeyPress);
-            // 
-            // cmbStatus
-            // 
-            this.cmbStatus.FormattingEnabled = true;
-            resources.ApplyResources(this.cmbStatus, "cmbStatus");
-            this.cmbStatus.Name = "cmbStatus";
-            this.cmbStatus.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbStatus_KeyPress);
-            // 
-            // mskDuração
-            // 
-            resources.ApplyResources(this.mskDuração, "mskDuração");
-            this.mskDuração.Name = "mskDuração";
-            this.mskDuração.ValidatingType = typeof(System.DateTime);
-            this.mskDuração.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.mskDuração_KeyPress);
-            // 
-            // panel4
-            // 
-            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(76)))), ((int)(((byte)(146)))));
-            this.panel4.Controls.Add(this.btnFoto);
-            this.panel4.Controls.Add(this.label10);
-            this.panel4.Controls.Add(this.pctFoto);
-            resources.ApplyResources(this.panel4, "panel4");
-            this.panel4.Name = "panel4";
-            // 
-            // pctFoto
-            // 
-            this.pctFoto.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            resources.ApplyResources(this.pctFoto, "pctFoto");
-            this.pctFoto.Name = "pctFoto";
-            this.pctFoto.TabStop = false;
-            // 
             // mySqlCommand1
             // 
             this.mySqlCommand1.CacheAge = 0;
             this.mySqlCommand1.Connection = null;
             this.mySqlCommand1.EnableCaching = false;
             this.mySqlCommand1.Transaction = null;
-            // 
-            // label10
-            // 
-            resources.ApplyResources(this.label10, "label10");
-            this.label10.BackColor = System.Drawing.Color.Transparent;
-            this.label10.ForeColor = System.Drawing.Color.White;
-            this.label10.Name = "label10";
-            // 
-            // btnFoto
-            // 
-            this.btnFoto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(76)))), ((int)(((byte)(146)))));
-            resources.ApplyResources(this.btnFoto, "btnFoto");
-            this.btnFoto.Name = "btnFoto";
-            this.btnFoto.UseVisualStyleBackColor = false;
-            this.btnFoto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.btnFoto_KeyPress);
             // 
             // frmCadServico
             // 
@@ -302,7 +307,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label lblFuncao;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblNome;
         private System.Windows.Forms.Button btnLimpar;
         private System.Windows.Forms.Button btnSalvar;
         private System.Windows.Forms.Button btnFechar;
@@ -310,17 +315,17 @@
         private System.Windows.Forms.TextBox txtValor;
         private System.Windows.Forms.TextBox txtDescricao;
         private System.Windows.Forms.TextBox txtNome;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblDuracao;
+        private System.Windows.Forms.Label lblStatus;
+        private System.Windows.Forms.Label lblEspecialidade;
+        private System.Windows.Forms.Label lblTipo;
+        private System.Windows.Forms.Label lblValor;
+        private System.Windows.Forms.Label lblDescricao;
         private System.Windows.Forms.MaskedTextBox mskDuração;
         private System.Windows.Forms.ComboBox cmbStatus;
         private System.Windows.Forms.ComboBox cmbEspecialidade;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label lblFoto;
         private System.Windows.Forms.PictureBox pctFoto;
         private MySql.Data.MySqlClient.MySqlCommand mySqlCommand1;
         private System.Windows.Forms.Button btnFoto;

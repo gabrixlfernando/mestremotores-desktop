@@ -67,7 +67,9 @@ namespace mestremotores_gabrielfernando
                 MessageBox.Show("Erro ao carregar os serviços. " + erro);
                 throw;
             }
-        }private void CarregarServicoNome()
+        }
+        
+        private void CarregarServicoNome()
         {
             
             try
@@ -245,8 +247,30 @@ namespace mestremotores_gabrielfernando
 
         private void btnCadastrar_Click(object sender, EventArgs e)
         {
+            Variaveis.funcao = "CADASTRAR";
             new frmCadServico().Show();
             Hide();
+        }
+
+        private void btnAlterar_Click(object sender, EventArgs e)
+        {
+            if (Variaveis.linhaSelecionada >= 0)
+            {
+                Variaveis.funcao = "ALTERAR";
+                new frmCadServico().Show();
+                Hide();
+            }
+            else
+            {
+                MessageBox.Show("Para alterar selecione uma linha da tabela.");
+            }
+            MessageBox.Show(Variaveis.linhaSelecionada.ToString());
+        }
+
+        private void dgvServico_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Variaveis.linhaSelecionada = int.Parse(e.RowIndex.ToString());
+
         }
     }
 }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 
 namespace mestremotores_gabrielfernando
 {
@@ -15,6 +16,61 @@ namespace mestremotores_gabrielfernando
         public frmCadServico()
         {
             InitializeComponent();
+        }
+
+        private void InserirServico()
+        {
+            try
+            {
+                Banco.Conectar();
+                string inserir= "INSERT INTO tbl_servico (nome_servico, descricao_servico, valor_servico, tempo_exec_servico, alt_servico, tipo_servico, id_especialidade, status_servico, foto_servico) VALUES (@nome, @descricao, @valor, @duracao, @alt, @tipo, @codEspecialidade, @status, @foto);";
+                MySqlCommand cmd = new MySqlCommand(inserir,Banco.conexao);
+                cmd.Parameters.AddWithValue("@nome", Variaveis.nomeServico);
+                cmd.Parameters.AddWithValue("@descricao", Variaveis.descricaoServico);
+                cmd.Parameters.AddWithValue("@valor", Variaveis.valorServico);
+                cmd.Parameters.AddWithValue("@duracao", Variaveis.duracaoServico.ToString("HH:mm"));
+                cmd.Parameters.AddWithValue("@alt", Variaveis.altServico);
+                cmd.Parameters.AddWithValue("@tipo", Variaveis.tipoServico);
+                cmd.Parameters.AddWithValue("@codEspecialidade", Variaveis.codEspecialidade);
+                cmd.Parameters.AddWithValue("@status", Variaveis.statusServico);
+                cmd.Parameters.AddWithValue("@foto", "servico/foto_teste.jpg");
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Serviço cadastrado com sucesso!", "CADASTRO SERVIÇO");
+                Banco.Desconectar();
+
+
+                //Estrutura pra foto
+            }
+            catch (Exception erro)
+            {
+                MessageBox.Show("ERRO ao cadastrar Serviço!\n\n" + erro, "ERRO");
+                
+            }
+        }
+
+        private void CarregarEspecialidade()
+        {
+            try
+            {
+                Banco.Conectar();
+                string selecionar = "SELECT id_especialidade, nome_especialidade FROM tbl_especialidade ORDER BY nome_especialidade;";
+                MySqlCommand cmd = new MySqlCommand(selecionar, Banco.conexao);
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                cmbEspecialidade.DataSource = dt;
+                cmbEspecialidade.DisplayMember = "nome_especialidade";
+                cmbEspecialidade.ValueMember = "id_especialidade";
+                cmbEspecialidade.SelectedIndex = -1;
+
+
+                Banco.Desconectar();
+            }
+            catch (Exception erro)
+            {
+                MessageBox.Show("Erro ao carrecar especialidades. " + erro);
+                throw;
+            }
         }
 
         private void btnFechar_Click(object sender, EventArgs e)
@@ -103,51 +159,85 @@ namespace mestremotores_gabrielfernando
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
+            lblNome.ForeColor = Color.White;
+            lblDescricao.ForeColor = Color.White;
+            lblValor.ForeColor = Color.White;
+            lblDuracao.ForeColor = Color.White;
+            lblTipo.ForeColor = Color.White;
+            lblEspecialidade.ForeColor = Color.White;
+            lblStatus.ForeColor = Color.White;
+
+
             if(txtNome.Text.Length == 0)
             {
+                lblNome.ForeColor = Color.Red;
                 MessageBox.Show("Preencha Nome.");
                 txtNome.Focus();
             }
             else if (txtDescricao.Text.Length == 0)
             {
+                lblDescricao.ForeColor = Color.Red;
                 MessageBox.Show("Preencha Descrição.");
                 txtDescricao.Focus();
             }
             else if(txtValor.Text.Length == 0)
             {
+                lblValor.ForeColor = Color.Red;
                 MessageBox.Show("Preencha Valor.");
                 txtValor.Focus();
 
             }
             else if (mskDuração.MaskCompleted == false)
             {
+                lblDuracao.ForeColor = Color.Red;
                 MessageBox.Show("Preencha a duração.");
                 mskDuração.Focus();
             }
             else if(txtTipo.Text.Length == 0)
             {
+                lblTipo.ForeColor = Color.Red;
                 MessageBox.Show("Preencha o tipo.");
                 txtTipo.Focus();
             }
-            else if(cmbEspecialidade.SelectedIndex < 0)
+            else if (cmbEspecialidade.SelectedIndex < 0)
             {
+                lblEspecialidade.ForeColor = Color.Red;
                 MessageBox.Show("Preencha a especialidade.");
                 cmbEspecialidade.Focus();
             }
             else if(cmbStatus.SelectedIndex < 0)
             {
+                lblStatus.ForeColor = Color.Red;
                 MessageBox.Show("Preencha o Status.");
                 cmbStatus.Focus();
             }
             else
             {
+                Variaveis.nomeServico = txtNome.Text;
+                Variaveis.descricaoServico = txtDescricao.Text;
+                Variaveis.valorServico = double.Parse(txtValor.Text);
+                Variaveis.duracaoServico = DateTime.Parse(mskDuração.Text);
+                Variaveis.altServico = txtNome.Text.ToLower();
+                Variaveis.tipoServico = txtTipo.Text;
+                Variaveis.codEspecialidade = Convert.ToInt32(cmbEspecialidade.SelectedValue);
+                Variaveis.statusServico = cmbStatus.Text;
 
+                if (Variaveis.funcao == "CADASTRAR")
+                {
+                    InserirServico();
+                    Variaveis.funcao = "";
+                }
+                else if(Variaveis.funcao == "ALTERAR")
+                {
+                    //AlterarServico();
+                }
             }
         }
 
         private void frmCadServico_Load(object sender, EventArgs e)
         {
-            lblFuncao.Text = "CADASTRAR";
+            lblFuncao.Text = Variaveis.funcao;
+            CarregarEspecialidade();
         }
     }
 }

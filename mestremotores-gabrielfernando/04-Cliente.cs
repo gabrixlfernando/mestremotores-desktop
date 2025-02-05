@@ -161,5 +161,32 @@ namespace mestremotores_gabrielfernando
                 CarregarCliente();
             }
         }
+
+        private void btnCadastrar_Click(object sender, EventArgs e)
+        {
+            Variaveis.funcao = "CADASTRAR";
+            new frmCadCliente().Show();
+            Hide();
+        }
+
+        private void btnAlterar_Click(object sender, EventArgs e)
+        {
+            if (Variaveis.linhaSelecionada >= 0)
+            {
+                Variaveis.funcao = "ALTERAR";
+                new frmCadCliente().Show();
+                Hide();
+            }
+            else
+            {
+                MessageBox.Show("Para alterar selecione uma linha da tabela.");
+            }
+            MessageBox.Show(Variaveis.linhaSelecionada.ToString());
+        }
+
+        private void dgvCliente_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Variaveis.linhaSelecionada = int.Parse(e.RowIndex.ToString());
+        }
     }
 }

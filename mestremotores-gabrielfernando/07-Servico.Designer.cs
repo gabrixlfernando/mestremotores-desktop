@@ -126,6 +126,7 @@
             this.btnAlterar.TabIndex = 13;
             this.btnAlterar.Text = "Alterar";
             this.btnAlterar.UseVisualStyleBackColor = false;
+            this.btnAlterar.Click += new System.EventHandler(this.btnAlterar_Click);
             // 
             // btnCadastrar
             // 
@@ -174,6 +175,7 @@
             this.dgvServico.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvServico.Size = new System.Drawing.Size(858, 422);
             this.dgvServico.TabIndex = 11;
+            this.dgvServico.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvServico_CellClick);
             this.dgvServico.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvServico_CellMouseEnter);
             this.dgvServico.CellMouseLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvServico_CellMouseLeave);
             // 

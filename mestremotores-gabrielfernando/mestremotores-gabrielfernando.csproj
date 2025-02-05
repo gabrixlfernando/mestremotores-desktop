@@ -192,6 +192,18 @@
     <Compile Include="04-Cliente.Designer.cs">
       <DependentUpon>04-Cliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="cadCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="cadCliente.Designer.cs">
+      <DependentUpon>cadCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="cadFuncionario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="cadFuncionario.Designer.cs">
+      <DependentUpon>cadFuncionario.cs</DependentUpon>
+    </Compile>
     <Compile Include="cadServico.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -200,6 +212,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Variaveis.cs" />
     <EmbeddedResource Include="01-Login.resx">
       <DependentUpon>01-Login.cs</DependentUpon>
     </EmbeddedResource>
@@ -238,6 +251,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="13-Galeria.resx">
       <DependentUpon>13-Galeria.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="cadCliente.resx">
+      <DependentUpon>cadCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="cadFuncionario.resx">
+      <DependentUpon>cadFuncionario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="cadServico.aa-DJ.resx">
       <DependentUpon>cadServico.cs</DependentUpon>
