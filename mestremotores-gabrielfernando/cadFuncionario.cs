@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 
 namespace mestremotores_gabrielfernando
 {
@@ -16,6 +17,68 @@ namespace mestremotores_gabrielfernando
         {
             InitializeComponent();
         }
+
+        private void InserirFuncionario()
+        {
+            try
+            {
+                Banco.Conectar();
+                string inserir = "INSERT INTO tbl_funcionario (nome_funcionario, cpf_funcionario, endereco_funcionario, bairro_funcionario, cidade_funcionario, estado_funcionario, telefone_funcionario, email_funcionario, senha_funcionario, data_cad_funcionario, status_funcionario, id_especialidade) VALUES (@nome, @cpf, @endereco, @bairro, @cidade, @estado,@telefone, @email, @senha ,@dataCad ,@status, @codEspecialidade);";
+                MySqlCommand cmd = new MySqlCommand(inserir, Banco.conexao);
+                cmd.Parameters.AddWithValue("@nome", Variaveis.nomeFuncionario);
+                cmd.Parameters.AddWithValue("@cpf", Variaveis.cpfFuncionario);
+                cmd.Parameters.AddWithValue("@endereco", Variaveis.enderecoFuncionario);
+                cmd.Parameters.AddWithValue("@bairro", Variaveis.bairroFuncionario);
+                cmd.Parameters.AddWithValue("@cidade", Variaveis.cidadeFuncionario);
+                cmd.Parameters.AddWithValue("@estado", Variaveis.estadoFuncionario);
+                cmd.Parameters.AddWithValue("@telefone", Variaveis.telefoneFuncionario);
+                cmd.Parameters.AddWithValue("@email", Variaveis.emailFuncionario);
+                cmd.Parameters.AddWithValue("@senha", Variaveis.senhaFuncionario);
+                cmd.Parameters.AddWithValue("@dataCad", Variaveis.dataCadFuncionario.ToString("dd/MM/yyyy"));
+                cmd.Parameters.AddWithValue("@status", Variaveis.statusFuncionario);
+                cmd.Parameters.AddWithValue("@codEspecialidade", Variaveis.codEspecialidade);
+             
+               
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Funcionario cadastrado com sucesso!", "CADASTRO FUNCIONARIO");
+                Banco.Desconectar();
+
+
+                //Estrutura pra foto
+            }
+            catch (Exception erro)
+            {
+                MessageBox.Show("ERRO ao cadastrar Funcionario!\n\n" + erro, "ERRO");
+
+            }
+        }
+
+
+        private void CarregarEspecialidade()
+        {
+            try
+            {
+                Banco.Conectar();
+                string selecionar = "SELECT id_especialidade, nome_especialidade FROM tbl_especialidade ORDER BY nome_especialidade;";
+                MySqlCommand cmd = new MySqlCommand(selecionar, Banco.conexao);
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                cmbEspecialidade.DataSource = dt;
+                cmbEspecialidade.DisplayMember = "nome_especialidade";
+                cmbEspecialidade.ValueMember = "id_especialidade";
+                cmbEspecialidade.SelectedIndex = -1;
+
+
+                Banco.Desconectar();
+            }
+            catch (Exception erro)
+            {
+                MessageBox.Show("Erro ao carrecar especialidades. " + erro);
+                throw;
+            }
+        }
+
 
         private void btnFechar_Click(object sender, EventArgs e)
         {
@@ -226,9 +289,38 @@ namespace mestremotores_gabrielfernando
             }
             else
             {
+                Variaveis.nomeFuncionario = txtNome.Text;
+                Variaveis.cpfFuncionario = mskCPF.Text;
+                Variaveis.enderecoFuncionario = txtEndereco.Text;
+                Variaveis.bairroFuncionario = txtBairro.Text;
+                Variaveis.cidadeFuncionario = txtCidade.Text;
+                Variaveis.estadoFuncionario = txtEstado.Text;
+                Variaveis.telefoneFuncionario = mskTelefone.Text;
+                Variaveis.emailFuncionario = txtEmail.Text;
+                Variaveis.senhaFuncionario = txtSenha.Text;
+                Variaveis.dataCadFuncionario = DateTime.Parse(dtpDataCad.Text);
+                Variaveis.statusFuncionario = cmbStatus.Text;
+                Variaveis.codEspecialidade = Convert.ToInt32(cmbEspecialidade.SelectedValue);
+               
+
+                if (Variaveis.funcao == "CADASTRAR")
+                {
+                    InserirFuncionario();
+                    Variaveis.funcao = "";
+                }
+                else if (Variaveis.funcao == "ALTERAR")
+                {
+                    //AlterarServico();
+                }
 
             }
 
+        }
+
+        private void frmCadFuncionario_Load(object sender, EventArgs e)
+        {
+            lblFuncao.Text = Variaveis.funcao;
+            CarregarEspecialidade();
         }
     }
 }

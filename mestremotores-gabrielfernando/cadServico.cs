@@ -47,6 +47,75 @@ namespace mestremotores_gabrielfernando
                 
             }
         }
+        
+        private void AlterarServico()
+        {
+            try
+            {
+                Banco.Conectar();
+                string alterar= "UPDATE tbl_servico SET nome_servico = @nome, descricao_servico = @descricao, valor_servico = @valor, tempo_exec_servico = @duracao, alt_servico = @alt, tipo_servico = @tipo, id_especialidade = @codEspecialidade, status_servico = @status WHERE id_servico = @codigo;";
+                MySqlCommand cmd = new MySqlCommand(alterar,Banco.conexao);
+                cmd.Parameters.AddWithValue("@nome", Variaveis.nomeServico);
+                cmd.Parameters.AddWithValue("@descricao", Variaveis.descricaoServico);
+                cmd.Parameters.AddWithValue("@valor", Variaveis.valorServico);
+                cmd.Parameters.AddWithValue("@duracao", Variaveis.duracaoServico.ToString("HH:mm"));
+                cmd.Parameters.AddWithValue("@alt", Variaveis.altServico);
+                cmd.Parameters.AddWithValue("@tipo", Variaveis.tipoServico);
+                cmd.Parameters.AddWithValue("@codEspecialidade", Variaveis.codEspecialidade);
+                cmd.Parameters.AddWithValue("@status", Variaveis.statusServico);
+                cmd.Parameters.AddWithValue("@codigo", Variaveis.codServico);
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Serviço alterado com sucesso!", "ALTERAR SERVIÇO");
+                Banco.Desconectar();
+
+
+                //Estrutura pra foto
+            }
+            catch (Exception erro)
+            {
+                MessageBox.Show("ERRO ao alterar Serviço!\n\n" + erro, "ERRO");
+                
+            }
+        }
+
+        private void CarregarDadosServico()
+        {
+            try
+            {
+                Banco.Conectar();
+                string selecionar = "SELECT id_servico, nome_servico, descricao_servico, valor_servico, tempo_exec_servico, alt_servico, tipo_servico, nome_especialidade, status_servico FROM tbl_servico s INNER JOIN tbl_especialidade e ON s.id_especialidade = e.id_especialidade WHERE id_servico = @codigo;";
+                MySqlCommand cmd = new MySqlCommand(selecionar, Banco.conexao);
+                cmd.Parameters.AddWithValue("@codigo", Variaveis.codServico);
+                MySqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    Variaveis.nomeServico = dr.GetString(1);
+                    Variaveis.descricaoServico = dr.GetString(2);
+                    Variaveis.valorServico = dr.GetDouble(3);
+                    //Variaveis.duracaoServico = Convert.ToDateTime(dr.GetString(4));
+                    Variaveis.altServico = dr.GetString(5);
+                    Variaveis.tipoServico = dr.GetString(6);
+                    Variaveis.nomeEspecialidade = dr.GetString(7);
+                    Variaveis.statusServico = dr.GetString(8);
+
+                    txtNome.Text = Variaveis.nomeServico;
+                    txtDescricao.Text = Variaveis.descricaoServico;
+                    txtValor.Text = Variaveis.valorServico.ToString("N2");
+                    //mskDuração.Text = Variaveis.duracaoServico.ToString();
+                    txtTipo.Text = Variaveis.tipoServico;
+                    cmbEspecialidade.Text = Variaveis.nomeEspecialidade;
+                    cmbStatus.Text = Variaveis.statusServico;
+
+
+                }
+                Banco.Desconectar();
+            }
+            catch (Exception erro)
+            {
+
+                MessageBox.Show("Erro ao carregar os dados do serviço" + erro, "ERRO");
+            }
+        }
 
         private void CarregarEspecialidade()
         {
@@ -229,7 +298,7 @@ namespace mestremotores_gabrielfernando
                 }
                 else if(Variaveis.funcao == "ALTERAR")
                 {
-                    //AlterarServico();
+                    AlterarServico();
                 }
             }
         }
@@ -238,6 +307,10 @@ namespace mestremotores_gabrielfernando
         {
             lblFuncao.Text = Variaveis.funcao;
             CarregarEspecialidade();
+            if (Variaveis.funcao == "ALTERAR")
+            {
+                CarregarDadosServico();
+            }
         }
     }
 }

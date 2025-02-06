@@ -34,6 +34,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.cmbEspecialidade = new System.Windows.Forms.ComboBox();
+            this.lblEspecialidade = new System.Windows.Forms.Label();
             this.dtpDataCad = new System.Windows.Forms.DateTimePicker();
             this.mskTelefone = new System.Windows.Forms.MaskedTextBox();
             this.mskCPF = new System.Windows.Forms.MaskedTextBox();
@@ -58,8 +60,6 @@
             this.lblNome = new System.Windows.Forms.Label();
             this.btnSalvar = new System.Windows.Forms.Button();
             this.btnLimpar = new System.Windows.Forms.Button();
-            this.cmbEspecialidade = new System.Windows.Forms.ComboBox();
-            this.lblEspecialidade = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -157,6 +157,27 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(857, 461);
             this.panel3.TabIndex = 16;
+            // 
+            // cmbEspecialidade
+            // 
+            this.cmbEspecialidade.FormattingEnabled = true;
+            this.cmbEspecialidade.Location = new System.Drawing.Point(558, 269);
+            this.cmbEspecialidade.Name = "cmbEspecialidade";
+            this.cmbEspecialidade.Size = new System.Drawing.Size(258, 21);
+            this.cmbEspecialidade.TabIndex = 11;
+            this.cmbEspecialidade.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbEspecialidade_KeyPress);
+            // 
+            // lblEspecialidade
+            // 
+            this.lblEspecialidade.AutoSize = true;
+            this.lblEspecialidade.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold);
+            this.lblEspecialidade.ForeColor = System.Drawing.Color.White;
+            this.lblEspecialidade.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.lblEspecialidade.Location = new System.Drawing.Point(553, 236);
+            this.lblEspecialidade.Name = "lblEspecialidade";
+            this.lblEspecialidade.Size = new System.Drawing.Size(175, 30);
+            this.lblEspecialidade.TabIndex = 10;
+            this.lblEspecialidade.Text = "ESPECIALIDADE:";
             // 
             // dtpDataCad
             // 
@@ -421,27 +442,6 @@
             this.btnLimpar.UseVisualStyleBackColor = false;
             this.btnLimpar.Click += new System.EventHandler(this.btnLimpar_Click);
             // 
-            // cmbEspecialidade
-            // 
-            this.cmbEspecialidade.FormattingEnabled = true;
-            this.cmbEspecialidade.Location = new System.Drawing.Point(558, 269);
-            this.cmbEspecialidade.Name = "cmbEspecialidade";
-            this.cmbEspecialidade.Size = new System.Drawing.Size(258, 21);
-            this.cmbEspecialidade.TabIndex = 11;
-            this.cmbEspecialidade.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbEspecialidade_KeyPress);
-            // 
-            // lblEspecialidade
-            // 
-            this.lblEspecialidade.AutoSize = true;
-            this.lblEspecialidade.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold);
-            this.lblEspecialidade.ForeColor = System.Drawing.Color.White;
-            this.lblEspecialidade.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblEspecialidade.Location = new System.Drawing.Point(553, 236);
-            this.lblEspecialidade.Name = "lblEspecialidade";
-            this.lblEspecialidade.Size = new System.Drawing.Size(175, 30);
-            this.lblEspecialidade.TabIndex = 10;
-            this.lblEspecialidade.Text = "ESPECIALIDADE:";
-            // 
             // frmCadFuncionario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -456,6 +456,7 @@
             this.Name = "frmCadFuncionario";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cadastro Funcionario";
+            this.Load += new System.EventHandler(this.frmCadFuncionario_Load);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);

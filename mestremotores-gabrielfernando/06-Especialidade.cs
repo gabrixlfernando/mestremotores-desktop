@@ -71,7 +71,8 @@ namespace mestremotores_gabrielfernando
                 MessageBox.Show("Erro ao carregar as especialidades. " + erro);
                 throw;
             }
-        } private void CarregarEspecialidadeStatus()
+        }
+        private void CarregarEspecialidadeStatus()
         {
             try
             {
@@ -97,10 +98,28 @@ namespace mestremotores_gabrielfernando
             }
         }
 
-        private void frmEspecialidade_Load(object sender, EventArgs e)
+        private void ExcluirEspecialidade()
         {
-            CarregarEspecialidade();
+            try
+            {
+                Banco.Conectar();
+                string alterar = "UPDATE tbl_especialidade SET status_especialidade = @status WHERE id_especialidade = @codigo;";
+                MySqlCommand cmd = new MySqlCommand(alterar, Banco.conexao);
+                cmd.Parameters.AddWithValue("@status", "DESATIVADO");
+                cmd.Parameters.AddWithValue("@codigo", Variaveis.codEspecialidade);
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Especialidade excluído com sucesso!", "EXCLUIR ESPECIALIDADE");
+                Banco.Desconectar();
+
+            }
+            catch (Exception erro)
+            {
+                MessageBox.Show("ERRO ao EXCLUIR Especialidade!\n\n" + erro, "ERRO");
+
+            }
         }
+
+        
 
      
 
@@ -131,6 +150,63 @@ namespace mestremotores_gabrielfernando
                 cmbStatus.Enabled = true;
                 CarregarEspecialidade();
             }
+        }
+
+        private void btnCadastrar_Click(object sender, EventArgs e)
+        {
+            Variaveis.funcao = "CADASTRAR";
+            new frmCadEspecialidade().Show();
+            Hide();
+        }
+
+        private void btnAlterar_Click(object sender, EventArgs e)
+        {
+            if (Variaveis.linhaSelecionada >= 0)
+            {
+                Variaveis.funcao = "ALTERAR";
+                new frmCadEspecialidade().Show();
+                Hide();
+            }
+            else
+            {
+                MessageBox.Show("Para alterar selecione uma linha da tabela.");
+            }
+            MessageBox.Show(Variaveis.linhaSelecionada.ToString());
+        }
+
+        private void dgvEspecialidade_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Variaveis.linhaSelecionada = int.Parse(e.RowIndex.ToString());
+            if (Variaveis.linhaSelecionada >= 0)
+            {
+                Variaveis.codEspecialidade = Convert.ToInt32(dgvEspecialidade[0, Variaveis.linhaSelecionada].Value);
+
+                //MessageBox.Show("Linha: " + Variaveis.linhaSelecionada + "\n Código: " + Variaveis.codServico);
+            }
+        }
+
+        private void btnExcluir_Click(object sender, EventArgs e)
+        {
+            if (Variaveis.linhaSelecionada >= 0)
+            {
+
+                var resposta = MessageBox.Show("Deseja Mesmo Excluir?", "EXCLUIR", MessageBoxButtons.YesNo);
+                if (resposta == DialogResult.Yes)
+                {
+                    ExcluirEspecialidade();
+                    CarregarEspecialidadeNome();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Para excluir selecione uma linha da tabela.");
+            }
+            MessageBox.Show(Variaveis.linhaSelecionada.ToString());
+        }
+
+        private void frmEspecialidade_Load(object sender, EventArgs e)
+        {
+            CarregarEspecialidade();
         }
     }
 }

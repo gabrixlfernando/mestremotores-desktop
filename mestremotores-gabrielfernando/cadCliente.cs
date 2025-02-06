@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 
 namespace mestremotores_gabrielfernando
 {
@@ -23,7 +24,42 @@ namespace mestremotores_gabrielfernando
             Close();
         }
 
-       
+        private void InserirCliente()
+        {
+            try
+            {
+                Banco.Conectar();
+                string inserir = "INSERT INTO tbl_cliente (nome_cliente, cpf_cliente, endereco_cliente, bairro_cliente, cidade_cliente, estado_cliente, telefone_cliente, email_cliente, senha_cliente, data_cad_cliente, status_cliente) VALUES (@nome, @cpf, @endereco, @bairro, @cidade, @estado,@telefone, @email, @senha ,@dataCad ,@status);";
+                MySqlCommand cmd = new MySqlCommand(inserir, Banco.conexao);
+                cmd.Parameters.AddWithValue("@nome", Variaveis.nomeCliente);
+                cmd.Parameters.AddWithValue("@cpf", Variaveis.cpfCliente);
+                cmd.Parameters.AddWithValue("@endereco", Variaveis.enderecoCliente);
+                cmd.Parameters.AddWithValue("@bairro", Variaveis.bairroCliente);
+                cmd.Parameters.AddWithValue("@cidade", Variaveis.cidadeCliente);
+                cmd.Parameters.AddWithValue("@estado", Variaveis.estadoCliente);
+                cmd.Parameters.AddWithValue("@telefone", Variaveis.telefoneCliente);
+                cmd.Parameters.AddWithValue("@email", Variaveis.emailCliente);
+                cmd.Parameters.AddWithValue("@senha", Variaveis.senhaCliente);
+                cmd.Parameters.AddWithValue("@dataCad", Variaveis.dataCadCliente.ToString("dd/MM/yyyy"));
+                cmd.Parameters.AddWithValue("@status", Variaveis.statusCliente);
+               
+
+
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Cliente cadastrado com sucesso!", "CADASTRO FUNCIONARIO");
+                Banco.Desconectar();
+
+
+                //Estrutura pra foto
+            }
+            catch (Exception erro)
+            {
+                MessageBox.Show("ERRO ao cadastrar Cliente!\n\n" + erro, "ERRO");
+
+            }
+        }
+
+
 
         private void txtNome_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -218,6 +254,30 @@ namespace mestremotores_gabrielfernando
             }
             else
             {
+
+                Variaveis.nomeCliente = txtNome.Text;
+                Variaveis.cpfCliente = mskCPF.Text;
+                Variaveis.enderecoCliente = txtEndereco.Text;
+                Variaveis.bairroCliente = txtBairro.Text;
+                Variaveis.cidadeCliente = txtCidade.Text;
+                Variaveis.estadoCliente = txtEstado.Text;
+                Variaveis.telefoneCliente = mskTelefone.Text;
+                Variaveis.emailCliente = txtEmail.Text;
+                Variaveis.senhaCliente = txtSenha.Text;
+                Variaveis.dataCadCliente = DateTime.Parse(dtpDataCad.Text);
+                Variaveis.statusCliente = cmbStatus.Text;
+               
+
+
+                if (Variaveis.funcao == "CADASTRAR")
+                {
+                    InserirCliente();
+                    Variaveis.funcao = "";
+                }
+                else if (Variaveis.funcao == "ALTERAR")
+                {
+                    //AlterarServico();
+                }
 
             }
             

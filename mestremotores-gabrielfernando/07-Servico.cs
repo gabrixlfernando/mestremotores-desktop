@@ -143,6 +143,27 @@ namespace mestremotores_gabrielfernando
             }
         }
 
+        private void ExcluirServico()
+        {
+            try
+            {
+                Banco.Conectar();
+                string alterar = "UPDATE tbl_servico SET status_servico = @status WHERE id_servico = @codigo;";
+                MySqlCommand cmd = new MySqlCommand(alterar, Banco.conexao);
+                cmd.Parameters.AddWithValue("@status", "DESATIVADO");
+                cmd.Parameters.AddWithValue("@codigo", Variaveis.codServico);
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Serviço excluído com sucesso!", "EXCLUIR SERVIÇO");
+                Banco.Desconectar();
+
+            }
+            catch (Exception erro)
+            {
+                MessageBox.Show("ERRO ao EXCLUIR Serviço!\n\n" + erro, "ERRO");
+
+            }
+        }
+
 
         private void MostrarImagem()
         {
@@ -270,7 +291,33 @@ namespace mestremotores_gabrielfernando
         private void dgvServico_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             Variaveis.linhaSelecionada = int.Parse(e.RowIndex.ToString());
+            if(Variaveis.linhaSelecionada >= 0)
+            {
+                Variaveis.codServico = Convert.ToInt32(dgvServico[1, Variaveis.linhaSelecionada].Value);
 
+                //MessageBox.Show("Linha: " + Variaveis.linhaSelecionada + "\n Código: " + Variaveis.codServico);
+            }
+
+        }
+
+        private void btnExcluir_Click(object sender, EventArgs e)
+        {
+            if (Variaveis.linhaSelecionada >= 0)
+            {
+
+                var resposta = MessageBox.Show("Deseja Mesmo Excluir?", "EXCLUIR", MessageBoxButtons.YesNo);
+                if (resposta == DialogResult.Yes)
+                {
+                    ExcluirServico();
+                    CarregarServicoNome();
+                    MostrarImagem();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Para excluir selecione uma linha da tabela.");
+            }
+            MessageBox.Show(Variaveis.linhaSelecionada.ToString());
         }
     }
 }

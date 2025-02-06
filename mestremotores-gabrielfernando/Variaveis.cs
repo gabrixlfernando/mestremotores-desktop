@@ -31,7 +31,7 @@ namespace mestremotores_gabrielfernando
 
         //ESPECIALIDADE
         public static int codEspecialidade;
-        public static string nomeEspecialidade;
+        public static string nomeEspecialidade, statusEspecialidade;
 
 
        
