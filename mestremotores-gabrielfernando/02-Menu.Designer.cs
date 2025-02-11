@@ -117,6 +117,7 @@
             this.dgvContato.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvContato.Size = new System.Drawing.Size(650, 217);
             this.dgvContato.TabIndex = 3;
+          
             this.dgvContato.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvContato_CellFormatting);
             // 
             // btnFechar
@@ -164,7 +165,6 @@
             this.lblData.TabIndex = 6;
             this.lblData.Text = "00/00/0000";
             this.lblData.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-       
             // 
             // lblHora
             // 
