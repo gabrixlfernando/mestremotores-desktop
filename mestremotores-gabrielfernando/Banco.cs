@@ -10,7 +10,7 @@ namespace mestremotores_gabrielfernando
 {
     public static class Banco
     {
-        //public static string db = "SERVER=localhost;USER=roor;DATABASE=mestremotores";
+        //public static string db = "SERVER=localhost;USER=root;DATABASE=mestremotores";
 
         public static string db = "SERVER=smpsistema.com.br;USER=u283879542_gabriel_f;PASSWORD=@Ti26_06;DATABASE=u283879542_gabriel_f;SSL MODE=None";
 
