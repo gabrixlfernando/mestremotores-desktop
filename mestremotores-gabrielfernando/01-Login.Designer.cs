@@ -133,6 +133,7 @@
             this.txtSenha.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtSenha.Location = new System.Drawing.Point(49, 21);
             this.txtSenha.Name = "txtSenha";
+            this.txtSenha.PasswordChar = '*';
             this.txtSenha.Size = new System.Drawing.Size(267, 13);
             this.txtSenha.TabIndex = 1;
             // 
