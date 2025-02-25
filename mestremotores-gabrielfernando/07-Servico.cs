@@ -167,7 +167,7 @@ namespace mestremotores_gabrielfernando
 
         private void MostrarImagem()
         {
-            string caminhoBase = @"C:\xampp\htdocs\ti26\mestremotores\";
+            string caminhoBase = @"C:\xampp\htdocs\mestre-motores\public\uploads";
 
             string nomeColunaImagem = "colunaImagem";
             if (dgvServico.Columns.Contains(nomeColunaImagem))

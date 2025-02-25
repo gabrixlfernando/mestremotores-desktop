@@ -20,9 +20,9 @@ namespace mestremotores_gabrielfernando
 
         private void btnEntrar_Click(object sender, EventArgs e)
         {
-            //new frmMenuPrincipal().Show();
-            //Hide();
-            autentic();
+            new frmMenuPrincipal().Show();
+            Hide();
+            //autentic();
         }
 
         private void autentic()

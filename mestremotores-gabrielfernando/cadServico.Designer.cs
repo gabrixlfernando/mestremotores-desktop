@@ -138,6 +138,7 @@
             resources.ApplyResources(this.btnFoto, "btnFoto");
             this.btnFoto.Name = "btnFoto";
             this.btnFoto.UseVisualStyleBackColor = false;
+            this.btnFoto.Click += new System.EventHandler(this.btnFoto_Click);
             this.btnFoto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.btnFoto_KeyPress);
             // 
             // lblFoto

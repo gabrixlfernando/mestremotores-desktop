@@ -33,6 +33,11 @@ namespace mestremotores_gabrielfernando
         public static int codEspecialidade;
         public static string nomeEspecialidade, statusEspecialidade;
 
+        //FTP
+        public static string enderecoServidorFtp = "ftp://127.0.0.1/";
+        public static string usuarioFtp= "ti26";
+        public static string senhaFtp = "123";
+
 
        
 

@@ -297,6 +297,21 @@ O</value>
   <data name="&gt;&gt;lblFuncao.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="btnFoto.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 15.75pt</value>
+  </data>
+  <data name="btnFoto.Location" type="System.Drawing.Point, System.Drawing">
+    <value>261, 214</value>
+  </data>
+  <data name="btnFoto.Size" type="System.Drawing.Size, System.Drawing">
+    <value>32, 32</value>
+  </data>
+  <data name="btnFoto.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="btnFoto.Text" xml:space="preserve">
+    <value>+</value>
+  </data>
   <data name="&gt;&gt;btnFoto.Name" xml:space="preserve">
     <value>btnFoto</value>
   </data>
@@ -309,6 +324,30 @@ O</value>
   <data name="&gt;&gt;btnFoto.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="lblFoto.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblFoto.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 24pt, style=Bold</value>
+  </data>
+  <data name="lblFoto.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblFoto.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 39</value>
+  </data>
+  <data name="lblFoto.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 180</value>
+  </data>
+  <data name="lblFoto.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="lblFoto.Text" xml:space="preserve">
+    <value>F
+O
+T
+O</value>
+  </data>
   <data name="&gt;&gt;lblFoto.Name" xml:space="preserve">
     <value>lblFoto</value>
   </data>
@@ -320,6 +359,18 @@ O</value>
   </data>
   <data name="&gt;&gt;lblFoto.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="pctFoto.Location" type="System.Drawing.Point, System.Drawing">
+    <value>62, 20</value>
+  </data>
+  <data name="pctFoto.Size" type="System.Drawing.Size, System.Drawing">
+    <value>231, 226</value>
+  </data>
+  <data name="pctFoto.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>Zoom</value>
+  </data>
+  <data name="pctFoto.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;pctFoto.Name" xml:space="preserve">
     <value>pctFoto</value>
@@ -766,90 +817,6 @@ O</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panel3.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="btnFoto.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 15.75pt</value>
-  </data>
-  <data name="btnFoto.Location" type="System.Drawing.Point, System.Drawing">
-    <value>261, 214</value>
-  </data>
-  <data name="btnFoto.Size" type="System.Drawing.Size, System.Drawing">
-    <value>32, 32</value>
-  </data>
-  <data name="btnFoto.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="btnFoto.Text" xml:space="preserve">
-    <value>+</value>
-  </data>
-  <data name="&gt;&gt;btnFoto.Name" xml:space="preserve">
-    <value>btnFoto</value>
-  </data>
-  <data name="&gt;&gt;btnFoto.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnFoto.Parent" xml:space="preserve">
-    <value>panel4</value>
-  </data>
-  <data name="&gt;&gt;btnFoto.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="lblFoto.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblFoto.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 24pt, style=Bold</value>
-  </data>
-  <data name="lblFoto.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblFoto.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 39</value>
-  </data>
-  <data name="lblFoto.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 180</value>
-  </data>
-  <data name="lblFoto.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="lblFoto.Text" xml:space="preserve">
-    <value>F
-O
-T
-O</value>
-  </data>
-  <data name="&gt;&gt;lblFoto.Name" xml:space="preserve">
-    <value>lblFoto</value>
-  </data>
-  <data name="&gt;&gt;lblFoto.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblFoto.Parent" xml:space="preserve">
-    <value>panel4</value>
-  </data>
-  <data name="&gt;&gt;lblFoto.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="pctFoto.Location" type="System.Drawing.Point, System.Drawing">
-    <value>62, 20</value>
-  </data>
-  <data name="pctFoto.Size" type="System.Drawing.Size, System.Drawing">
-    <value>231, 226</value>
-  </data>
-  <data name="pctFoto.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;pctFoto.Name" xml:space="preserve">
-    <value>pctFoto</value>
-  </data>
-  <data name="&gt;&gt;pctFoto.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pctFoto.Parent" xml:space="preserve">
-    <value>panel4</value>
-  </data>
-  <data name="&gt;&gt;pctFoto.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="btnLimpar.Font" type="System.Drawing.Font, System.Drawing">

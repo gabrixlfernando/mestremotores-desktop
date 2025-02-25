@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Security;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
@@ -16,6 +20,42 @@ namespace mestremotores_gabrielfernando
         public frmCadServico()
         {
             InitializeComponent();
+        }
+
+        //Validação FTP
+
+        private bool ValidarFTP()
+        {
+            if(string.IsNullOrEmpty(Variaveis.enderecoServidorFtp) || string.IsNullOrEmpty(Variaveis.usuarioFtp) || string.IsNullOrEmpty(Variaveis.senhaFtp))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+
+        //Conversão IMG -> Byte
+        public byte[] GetImgToByte(string caminhoArquivoFtp)
+        {
+            WebClient ftpClient = new WebClient();
+            ftpClient.Credentials = new NetworkCredential(Variaveis.usuarioFtp, Variaveis.senhaFtp);
+            byte[] imageToByte = ftpClient.DownloadData(caminhoArquivoFtp);
+            return imageToByte;
+        }
+
+        //Conversão byte -> img
+        private static Bitmap ByteToImage(byte[] blob)
+        {
+            MemoryStream memoryStream = new MemoryStream();
+            byte[] pData = blob;
+            memoryStream.Write(pData, 0, Convert.ToInt32(pData.Length));
+            Bitmap bmp = new Bitmap(memoryStream, false);
+            memoryStream.Dispose();
+            return bmp;
+            
         }
 
         private void InserirServico()
@@ -33,13 +73,30 @@ namespace mestremotores_gabrielfernando
                 cmd.Parameters.AddWithValue("@tipo", Variaveis.tipoServico);
                 cmd.Parameters.AddWithValue("@codEspecialidade", Variaveis.codEspecialidade);
                 cmd.Parameters.AddWithValue("@status", Variaveis.statusServico);
-                cmd.Parameters.AddWithValue("@foto", "servico/foto_teste.jpg");
+                cmd.Parameters.AddWithValue("@foto", Variaveis.fotoServico);
                 cmd.ExecuteNonQuery();
                 MessageBox.Show("Serviço cadastrado com sucesso!", "CADASTRO SERVIÇO");
                 Banco.Desconectar();
 
 
                 //Estrutura pra foto
+                if (ValidarFTP())
+                {
+                    if(!string.IsNullOrEmpty(Variaveis.fotoServico))
+                    {
+                        string urlEnviarArquivo = Variaveis.enderecoServidorFtp + "servico/" + Path.GetFileName(Variaveis.fotoServico);
+
+                        try
+                        {
+                            ftp.EnviarArquivoFtp(Variaveis.caminhoFotoServico, urlEnviarArquivo, Variaveis.usuarioFtp, Variaveis.senhaFtp);
+                        }
+                        catch 
+                        {
+
+                            MessageBox.Show("Foto não selecionada ou foto já existente!");
+                        }
+                    }
+                }
             }
             catch (Exception erro)
             {
@@ -78,12 +135,53 @@ namespace mestremotores_gabrielfernando
             }
         }
 
+        private void AlterarFotoServico()
+        {
+            try
+            {
+                Banco.Conectar();
+                string alterar = "UPDATE tbl_servico SET foto_servico = @foto WHERE id_servico = @codigo;";
+                MySqlCommand cmd = new MySqlCommand(alterar, Banco.conexao);
+
+                cmd.Parameters.AddWithValue("@foto", Variaveis.fotoServico);
+                cmd.Parameters.AddWithValue("@codigo", Variaveis.codServico);
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Serviço alterado com sucesso!", "ALTERAR SERVIÇO");
+                Banco.Desconectar();
+
+
+                //Estrutura pra foto
+                if (ValidarFTP())
+                {
+                    if (!string.IsNullOrEmpty(Variaveis.fotoServico))
+                    {
+                        string urlEnviarArquivo = Variaveis.enderecoServidorFtp + "servico/" + Path.GetFileName(Variaveis.fotoServico);
+
+                        try
+                        {
+                            ftp.EnviarArquivoFtp(Variaveis.caminhoFotoServico, urlEnviarArquivo, Variaveis.usuarioFtp, Variaveis.senhaFtp);
+                        }
+                        catch
+                        {
+
+                            MessageBox.Show("Foto não selecionada ou foto já existente!");
+                        }
+                    }
+                }
+            }
+            catch (Exception erro)
+            {
+                MessageBox.Show("ERRO ao alterar Serviço!\n\n" + erro, "ERRO");
+
+            }
+        }
+
         private void CarregarDadosServico()
         {
             try
             {
                 Banco.Conectar();
-                string selecionar = "SELECT id_servico, nome_servico, descricao_servico, valor_servico, tempo_exec_servico, alt_servico, tipo_servico, nome_especialidade, status_servico FROM tbl_servico s INNER JOIN tbl_especialidade e ON s.id_especialidade = e.id_especialidade WHERE id_servico = @codigo;";
+                string selecionar = "SELECT id_servico, nome_servico, descricao_servico, valor_servico, tempo_exec_servico, alt_servico, tipo_servico, nome_especialidade, status_servico, foto_servico FROM tbl_servico s INNER JOIN tbl_especialidade e ON s.id_especialidade = e.id_especialidade WHERE id_servico = @codigo;";
                 MySqlCommand cmd = new MySqlCommand(selecionar, Banco.conexao);
                 cmd.Parameters.AddWithValue("@codigo", Variaveis.codServico);
                 MySqlDataReader dr = cmd.ExecuteReader();
@@ -97,6 +195,8 @@ namespace mestremotores_gabrielfernando
                     Variaveis.tipoServico = dr.GetString(6);
                     Variaveis.nomeEspecialidade = dr.GetString(7);
                     Variaveis.statusServico = dr.GetString(8);
+                    Variaveis.fotoServico = dr.GetString(9);
+                    Variaveis.fotoServico = Variaveis.fotoServico.Remove(0, 8);
 
                     txtNome.Text = Variaveis.nomeServico;
                     txtDescricao.Text = Variaveis.descricaoServico;
@@ -105,6 +205,7 @@ namespace mestremotores_gabrielfernando
                     txtTipo.Text = Variaveis.tipoServico;
                     cmbEspecialidade.Text = Variaveis.nomeEspecialidade;
                     cmbStatus.Text = Variaveis.statusServico;
+                    pctFoto.Image = ByteToImage(GetImgToByte(Variaveis.enderecoServidorFtp + "servico/" + Variaveis.fotoServico));
 
 
                 }
@@ -204,6 +305,50 @@ namespace mestremotores_gabrielfernando
             }
         }
 
+        private void btnFoto_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OpenFileDialog ofd = new OpenFileDialog();
+                ofd.Multiselect = false;
+                ofd.FileName = "";
+                ofd.InitialDirectory = @"C:";
+                ofd.Title = "SELECIONE UMA FOTO";
+                ofd.Filter = "JPG ou PNG(*.jpg ou *.png)|*.jpg;*.png";
+                ofd.CheckFileExists = true;
+                ofd.CheckPathExists = true;
+                ofd.RestoreDirectory = true;
+
+                DialogResult dr = ofd.ShowDialog();
+                pctFoto.Image = Image.FromFile(ofd.FileName);
+                Variaveis.fotoServico = "servico/" + Regex.Replace(txtNome.Text, @"\s", "_").ToLower() + ".png";
+
+                if (dr == DialogResult.Yes)
+                {
+                    try
+                    {
+                        Variaveis.atFotoServico = "S";
+                        Variaveis.caminhoFotoServico = ofd.FileName;
+                    }
+                    catch (SecurityException erro)
+                    {
+
+                        MessageBox.Show("Erro de segurança, fale com o ADMIN; \n" + erro.Message + "\nDetalhe:\n" + erro.StackTrace);
+                    }
+                    catch (Exception erro)
+                    {
+                        MessageBox.Show("Você não tem permissão para imagens." + erro);
+                    }
+                }
+                btnSalvar.Focus();
+            }
+            catch (Exception erro)
+            {
+
+                throw erro;
+            }
+        }
+
         private void btnFoto_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
@@ -299,6 +444,10 @@ namespace mestremotores_gabrielfernando
                 else if(Variaveis.funcao == "ALTERAR")
                 {
                     AlterarServico();
+                    if (Variaveis.atFotoServico == "S")
+                    {
+                        AlterarFotoServico();
+                    }
                 }
             }
         }
@@ -312,5 +461,7 @@ namespace mestremotores_gabrielfernando
                 CarregarDadosServico();
             }
         }
+
+       
     }
 }
