@@ -323,7 +323,7 @@ namespace mestremotores_gabrielfernando
                 pctFoto.Image = Image.FromFile(ofd.FileName);
                 Variaveis.fotoServico = "servico/" + Regex.Replace(txtNome.Text, @"\s", "_").ToLower() + ".png";
 
-                if (dr == DialogResult.Yes)
+                if (dr == DialogResult.OK)
                 {
                     try
                     {
