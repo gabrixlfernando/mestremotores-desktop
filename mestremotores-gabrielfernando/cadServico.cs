@@ -205,7 +205,16 @@ namespace mestremotores_gabrielfernando
                     txtTipo.Text = Variaveis.tipoServico;
                     cmbEspecialidade.Text = Variaveis.nomeEspecialidade;
                     cmbStatus.Text = Variaveis.statusServico;
-                    pctFoto.Image = ByteToImage(GetImgToByte(Variaveis.enderecoServidorFtp + "servico/" + Variaveis.fotoServico));
+                    try
+                    {
+                        pctFoto.Image = ByteToImage(GetImgToByte(Variaveis.enderecoServidorFtp + "servico/" + Variaveis.fotoServico));
+                    }
+                    catch
+                    {
+                        pctFoto.Image = ByteToImage(GetImgToByte(Variaveis.enderecoServidorFtp + "servico/semfoto.png"));
+
+                    }
+                   
 
 
                 }
@@ -321,7 +330,7 @@ namespace mestremotores_gabrielfernando
 
                 DialogResult dr = ofd.ShowDialog();
                 pctFoto.Image = Image.FromFile(ofd.FileName);
-                Variaveis.fotoServico = "servico/" + Regex.Replace(txtNome.Text, @"\s", "_").ToLower() + ".png";
+                Variaveis.fotoServico = "servico/" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + Regex.Replace(txtNome.Text, @"\s", "_").ToLower() + ".png";
 
                 if (dr == DialogResult.OK)
                 {

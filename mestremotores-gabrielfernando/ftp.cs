@@ -29,9 +29,8 @@ namespace mestremotores_gabrielfernando
 
 					using (Stream stream = request.GetRequestStream())
 					{
-						while (bytesSent < buffer.Length)
+						while ((bytes = fs.Read (buffer, 0, buffer.Length)) > 0)
 						{
-							bytes = fs.Read(buffer, 0, buffer.Length);
 							stream.Write(buffer, 0, bytes);
 							bytesSent += bytes;
 						}
