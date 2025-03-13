@@ -38,7 +38,7 @@ namespace mestremotores_gabrielfernando
             try
             {
                 Banco.Conectar();
-                string selecionar = "SELECT* FROM tbl_servico WHERE status_servico<> 'DESATIVADO' ORDER BY nome_servico;";
+                string selecionar = "SELECT * FROM tbl_servico WHERE status_servico<> 'DESATIVADO' ORDER BY nome_servico;";
                 MySqlCommand cmd = new MySqlCommand(selecionar, Banco.conexao);
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
@@ -75,7 +75,7 @@ namespace mestremotores_gabrielfernando
             try
             {
                 Banco.Conectar();
-                string selecionar = "SELECT* FROM tbl_servico WHERE nome_servico LIKE @nome ORDER BY nome_servico;";
+                string selecionar = "SELECT * FROM tbl_servico WHERE nome_servico LIKE @nome ORDER BY nome_servico;";
                 MySqlCommand cmd = new MySqlCommand(selecionar, Banco.conexao);
                 cmd.Parameters.AddWithValue("@nome", "%" + txtServico.Text + "%");
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
@@ -111,7 +111,7 @@ namespace mestremotores_gabrielfernando
             try
             {
                 Banco.Conectar();
-                string selecionar = "SELECT* FROM tbl_servico WHERE status_servico = @status ORDER BY nome_servico;";
+                string selecionar = "SELECT * FROM tbl_servico WHERE status_servico = @status ORDER BY nome_servico;";
                 MySqlCommand cmd = new MySqlCommand(selecionar, Banco.conexao);
                 cmd.Parameters.AddWithValue("@status", cmbStatus.Text);
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
@@ -319,5 +319,7 @@ namespace mestremotores_gabrielfernando
             }
             MessageBox.Show(Variaveis.linhaSelecionada.ToString());
         }
+
+       
     }
 }
