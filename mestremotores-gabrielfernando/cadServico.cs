@@ -68,7 +68,7 @@ namespace mestremotores_gabrielfernando
                 cmd.Parameters.AddWithValue("@nome", Variaveis.nomeServico);
                 cmd.Parameters.AddWithValue("@descricao", Variaveis.descricaoServico);
                 cmd.Parameters.AddWithValue("@valor", Variaveis.valorServico);
-                cmd.Parameters.AddWithValue("@duracao", Variaveis.duracaoServico.ToString("HH:mm"));
+                cmd.Parameters.AddWithValue("@duracao", Variaveis.duracaoServico);
                 cmd.Parameters.AddWithValue("@alt", Variaveis.altServico);
                 cmd.Parameters.AddWithValue("@tipo", Variaveis.tipoServico);
                 cmd.Parameters.AddWithValue("@codEspecialidade", Variaveis.codEspecialidade);
@@ -115,7 +115,7 @@ namespace mestremotores_gabrielfernando
                 cmd.Parameters.AddWithValue("@nome", Variaveis.nomeServico);
                 cmd.Parameters.AddWithValue("@descricao", Variaveis.descricaoServico);
                 cmd.Parameters.AddWithValue("@valor", Variaveis.valorServico);
-                cmd.Parameters.AddWithValue("@duracao", Variaveis.duracaoServico.ToString("HH:mm"));
+                cmd.Parameters.AddWithValue("@duracao", Variaveis.duracaoServico);
                 cmd.Parameters.AddWithValue("@alt", Variaveis.altServico);
                 cmd.Parameters.AddWithValue("@tipo", Variaveis.tipoServico);
                 cmd.Parameters.AddWithValue("@codEspecialidade", Variaveis.codEspecialidade);
@@ -190,7 +190,7 @@ namespace mestremotores_gabrielfernando
                     Variaveis.nomeServico = dr.GetString(1);
                     Variaveis.descricaoServico = dr.GetString(2);
                     Variaveis.valorServico = dr.GetDouble(3);
-                    //Variaveis.duracaoServico = Convert.ToDateTime(dr.GetString(4));
+                    Variaveis.duracaoServico = dr.GetTimeSpan(4);
                     Variaveis.altServico = dr.GetString(5);
                     Variaveis.tipoServico = dr.GetString(6);
                     Variaveis.nomeEspecialidade = dr.GetString(7);
@@ -201,7 +201,7 @@ namespace mestremotores_gabrielfernando
                     txtNome.Text = Variaveis.nomeServico;
                     txtDescricao.Text = Variaveis.descricaoServico;
                     txtValor.Text = Variaveis.valorServico.ToString("N2");
-                    //mskDuração.Text = Variaveis.duracaoServico.ToString();
+                    mskDuração.Text = Variaveis.duracaoServico.ToString();
                     txtTipo.Text = Variaveis.tipoServico;
                     cmbEspecialidade.Text = Variaveis.nomeEspecialidade;
                     cmbStatus.Text = Variaveis.statusServico;
@@ -439,7 +439,7 @@ namespace mestremotores_gabrielfernando
                 Variaveis.nomeServico = txtNome.Text;
                 Variaveis.descricaoServico = txtDescricao.Text;
                 Variaveis.valorServico = double.Parse(txtValor.Text);
-                Variaveis.duracaoServico = DateTime.Parse(mskDuração.Text);
+                Variaveis.duracaoServico = TimeSpan.Parse(mskDuração.Text);
                 Variaveis.altServico = txtNome.Text.ToLower();
                 Variaveis.tipoServico = txtTipo.Text;
                 Variaveis.codEspecialidade = Convert.ToInt32(cmbEspecialidade.SelectedValue);

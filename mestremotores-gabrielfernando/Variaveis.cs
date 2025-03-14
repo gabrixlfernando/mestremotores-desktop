@@ -26,7 +26,7 @@ namespace mestremotores_gabrielfernando
         public static int codServico;
         public static string nomeServico, descricaoServico, fotoServico, caminhoFotoServico, atFotoServico, altServico,tipoServico, statusServico;
         public static double valorServico;
-        public static DateTime duracaoServico;
+        public static TimeSpan duracaoServico;
 
 
         //ESPECIALIDADE
